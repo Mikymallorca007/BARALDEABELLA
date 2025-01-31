@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            text-align: center;
+        }
+        header {
+            background-color: #E60012;
+            color: white;
+            padding: 20px;
+            font-size: 2em;
+        }
+        .cart-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+        }
+        .cart-item {
+            width: 100%;
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        .cart-item .item-info {
+            flex: 1;
+            text-align: left;
+        }
+        .cart-item .item-price {
+            text-align: right;
+            width: 120px;
+        }
+        button {
+            background-color: #E60012;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #B5000F;
+        }
+        .back-button {
+            display: inline-block;
+            margin: 10px;
+            position: absolute;
+            top: 6px;
+            left: 8px;
+            width: 50px;
+            height: 50px;
+        }
+        .whatsapp-button {
+            background-color: #25D366;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 1.2em;
+            margin-top: 20px;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .whatsapp-button:hover {
+            background-color: #128C7E;
+        }
+    </style>
+</head>
+<body>
+    <!-- Botón para regresar -->
+    <a href="javascript:history.back()">
+        <img src="Imagenes/Icono Regresar.png" alt="Regresar atrás" class="back-button">
+    </a>
+
+    <header>Carrito<br>de Compras</header>
+
+    <div class="cart-container">
+        <!-- Aquí se agregará la lista de artículos del Carrito -->
+        <div id="cart-items"></div>
+
+        <!-- Botón para continuar comprando -->
+        <button onclick="continuarComprando()">Continuar Comprando</button>
+
+        <!-- Botón para enviar por WhatsApp -->
+        <a id="whatsapp-link" href="#" class="whatsapp-button" target="_blank">
+            Enviar por WhatsApp
+        </a>
+    </div>
+
+    <script>
+        // Obtener Carrito del almacenamiento local
+        let Carrito = JSON.parse(localStorage.getItem('Carrito')) || [];
+
+        // Función para mostrar los artículos en el Carrito
+        function mostrarCarrito() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            cartItemsContainer.innerHTML = ''; // Limpiar contenido
+            let totalPedido = 0; // Inicializar el total del pedido
+            let detallePedido = ''; // Para almacenar los detalles de los productos
+
+            if (Carrito.length === 0) {
+                cartItemsContainer.innerHTML = '<p>No tienes productos en el Carrito.</p>';
+            } else {
+                Carrito.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.classList.add('cart-item');
+
+                    // Información del producto
+                    const itemInfo = document.createElement('div');
+                    itemInfo.classList.add('item-info');
+                    itemInfo.innerHTML = `<strong>${item.nombre}</strong><br>Extras: ${item.extras.join(', ')}`;
+
+                    // Precio del producto
+                    const itemPrice = document.createElement('div');
+                    itemPrice.classList.add('item-price');
+                    itemPrice.innerHTML = `${item.precioTotal.toFixed(2)}€`;
+
+                    itemDiv.appendChild(itemInfo);
+                    itemDiv.appendChild(itemPrice);
+                    cartItemsContainer.appendChild(itemDiv);
+
+                    // Agregar detalles del producto al mensaje
+                    detallePedido += `${item.nombre} - Extras: ${item.extras.join(', ')} - Precio: ${item.precioTotal.toFixed(2)}€\n`;
+
+                    totalPedido += item.precioTotal; // Sumar el precio al total
+                });
+            }
+
+            // Agregar el total al mensaje de WhatsApp
+            const mensaje = `¡Hola! Quiero hacer un pedido.\n\n${detallePedido}\nTotal: ${totalPedido.toFixed(2)}€`;
+
+            // Actualizar el enlace de WhatsApp con el mensaje que incluye el precio total y los artículos
+            const whatsappLink = document.getElementById('whatsapp-link');
+            whatsappLink.href = `https://wa.me/34652399666?text=${encodeURIComponent(mensaje)}`;
+        }
+
+        // Función para continuar comprando (volver a la página anterior)
+        function continuarComprando() {
+            history.back(); // Vuelve a la página anterior en el historial
+        }
+
+        // Mostrar el Carrito cuando se carga la página
+        window.onload = mostrarCarrito;
+    </script>
+</body>
+</html>

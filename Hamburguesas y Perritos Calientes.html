@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamburguesas / Perritos Calientes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            text-align: center;
+        }
+        header {
+            background-color: #E60012;
+            color: white;
+            padding: 20px;
+            font-size: 1.5em;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cart-container {
+            position: absolute;
+            right: 20px; /* Carrito alineado a la derecha */
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .cart-icon {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
+        .menu-container {
+            padding: 30px;
+        }
+        .menu-item {
+            display: inline-block;
+            margin: 20px;
+            text-align: center;
+        }
+        .menu-item img {
+            width: 250px;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease; /* Transición suave */
+        }
+        .menu-item img:hover {
+            transform: scale(1.1); /* Efecto de inflado al pasar el cursor */
+        }
+        .menu-item p {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .back-button {
+            display: block;
+            margin: 20px auto;
+            width: 60px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Hamburguesas<br>Perritos Calientes
+        <div class="cart-container">
+            <a href="Carrito.html">
+                <img src="Imagenes/Carrito.png" alt="Ver Carrito" class="cart-icon">
+            </a>
+        </div>
+    </header>
+
+    <!-- Botón Volver a inicio -->
+    <a href="index.html"><img src="Imagenes/Icono INICIO.jpg" alt="Volver" class="back-button"></a>
+
+    <!-- Botón Regresar atrás con la nueva imagen -->
+    <a href="javascript:history.back()">
+        <img src="Imagenes/Icono Regresar.png" alt="Regresar atrás" class="back-button">
+    </a>
+    
+    <div class="menu-item">
+        <a href="Hamburguesas.html">
+            <img src="Imagenes/Comidas/Tipos Hamburguesas.jpeg" alt="Hamburguesas">
+        </a>
+        <p>Hamburguesas</p>
+    </div>
+
+    <div class="menu-item">
+        <img src="Imagenes/Comidas/Tipos Perritos.jpg" alt="Perritos Calientes">
+        <p>Perritos</p>
+    </div>
+</body>
+</html>
