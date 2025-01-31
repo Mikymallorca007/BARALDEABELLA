@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comida</title> <!-- Título de la página -->
+    <title>Comida</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -47,16 +47,16 @@
         .section {
             padding: 40px;
             text-align: center;
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
             justify-content: center;
-            flex-wrap: wrap;
         }
         .category {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 300px;
-            margin: 20px;
+            width: 100%;
             text-align: center;
         }
         .category img {
@@ -83,6 +83,18 @@
             text-align: center;
             padding: 10px;
         }
+        /* Ajuste para la última fila con 2 elementos */
+        .section .category:nth-last-child(-n+2) {
+            grid-column: span 1;
+        }
+        @media (max-width: 768px) {
+            .section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .section .category:nth-last-child(-n+2) {
+                grid-column: span 2;
+            }
+        }
     </style>
 </head>
 <body>
@@ -100,35 +112,51 @@
 
     <div class="section">
         <div class="category">
-            <a href="Hamburguesas y Perritos Calientes.html"><img src="Imagenes/Comidas/Icono Hamburguesas y Perritos.jpeg" alt="Hamburguesas / Perrito Caliente"></a>
+            <a href="Hamburguesas y Perritos Calientes.html">
+                <img src="Imagenes/Comidas/Icono Hamburguesas y Perritos.jpeg" alt="Hamburguesas / Perrito Caliente">
+            </a>
             <a href="Hamburguesas  Perrito Caliente.html">Hamburguesas / Perritos Calientes</a>
         </div>
         <div class="category">
-            <a href="bocadillos.html"><img src="Imagenes/Comidas/Icono Bocadillos.jpeg" alt="Bocadillos"></a>
+            <a href="bocadillos.html">
+                <img src="Imagenes/Comidas/Icono Bocadillos.jpeg" alt="Bocadillos">
+            </a>
             <a href="bocadillos.html">Bocadillos</a>
         </div>
         <div class="category">
-            <a href="sandwiches.html"><img src="Imagenes/Comidas/Icono Sandwiches.jpeg" alt="Sandwiches"></a>
+            <a href="sandwiches.html">
+                <img src="Imagenes/Comidas/Icono Sandwiches.jpeg" alt="Sandwiches">
+            </a>
             <a href="sandwiches.html">Sandwiches</a>
         </div>
         <div class="category">
-            <a href="pizzas.html"><img src="Imagenes/Comidas/Icono Pizzas.jpeg" alt="Pizzas"></a>
+            <a href="pizzas.html">
+                <img src="Imagenes/Comidas/Icono Pizzas.jpeg" alt="Pizzas">
+            </a>
             <a href="pizzas.html">Pizzas</a>
         </div>
         <div class="category">
-            <a href="raciones.html"><img src="Imagenes/Comidas/Icono Raciones.jpeg" alt="Raciones"></a>
+            <a href="raciones.html">
+                <img src="Imagenes/Comidas/Icono Raciones.jpeg" alt="Raciones">
+            </a>
             <a href="raciones.html">Raciones</a>
         </div>
         <div class="category">
-            <a href="desayunos.html"><img src="Imagenes/Comidas/Icono Desayunos.jpeg" alt="Desayunos"></a>
+            <a href="desayunos.html">
+                <img src="Imagenes/Comidas/Icono Desayunos.jpeg" alt="Desayunos">
+            </a>
             <a href="desayunos.html">Desayunos</a>
         </div>
         <div class="category">
-            <a href="platoscombinados.html"><img src="Imagenes/Comidas/Icono Platos Combinados.jpeg" alt="Platos Combinados"></a>
+            <a href="platoscombinados.html">
+                <img src="Imagenes/Comidas/Icono Platos Combinados.jpeg" alt="Platos Combinados">
+            </a>
             <a href="platoscombinados.html">Platos Combinados</a>
         </div>
         <div class="category">
-            <a href="rolls.html"><img src="Imagenes/Comidas/Icono Rolls.jpeg" alt="Rolls"></a>
+            <a href="rolls.html">
+                <img src="Imagenes/Comidas/Icono Rolls.jpeg" alt="Rolls">
+            </a>
             <a href="rolls.html">Rolls</a>
         </div>
     </div>
