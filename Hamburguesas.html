@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú de Hamburguesas</title>
+    <title>Hamburguesas y Perritos Calientes</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -11,21 +11,35 @@
             margin: 0;
             padding: 0;
             background-color: #fff;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         header {
             background-color: #E60012;
             color: white;
             padding: 20px;
             font-size: 1.5em;
-            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            text-align: center;
+        }
+        .go-home-button {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .go-home-button img {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
         }
         .cart-container {
             position: absolute;
-            right: 20px; /* Carrito alineado a la derecha */
+            right: 20px;
             top: 50%;
             transform: translateY(-50%);
         }
@@ -34,74 +48,113 @@
             height: 50px;
             cursor: pointer;
         }
-        .menu-container {
-            padding: 30px;
+        .back-button-container {
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            background-color: #E60012;
         }
-        .menu-item {
-            display: inline-block;
-            margin: 20px;
+        .back-button img {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+        .section {
+            padding: 20px;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 1;
         }
-        .menu-item img {
-            width: 250px;
+        .row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .category {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 45%;
+        }
+        .category img {
+            width: 100%;
+            max-width: 250px;
             height: auto;
             border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
         }
-        .menu-item img:hover {
+        .category img:hover {
             transform: scale(1.1);
         }
-        .menu-item p {
+        .category a {
+            text-decoration: none;
+            color: black;
             font-size: 1.2em;
             font-weight: bold;
+            display: block;
             margin-top: 10px;
         }
-        .back-button {
-            display: block;
-            margin: 20px auto;
-            width: 60px;
+        footer {
+            background-color: #E60012;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
         }
     </style>
 </head>
 <body>
     <header>
-        Hamburguesas
+        <a href="index.html" class="go-home-button">
+            <img src="Imagenes/Icono INICIO.jpg" alt="Volver al Inicio">
+        </a>
+        <div>Hamburguesas</div>
         <div class="cart-container">
             <a href="Carrito.html">
                 <img src="Imagenes/Carrito.png" alt="Ver Carrito" class="cart-icon">
             </a>
         </div>
     </header>
-    
-    <!-- Botón Volver a inicio -->
-    <a href="index.html">
-        <img src="Imagenes/Icono INICIO.jpg" alt="Volver" class="back-button">
-    </a>
 
-    <!-- Botón Regresar atrás -->
-    <a href="javascript:history.back()">
-        <img src="Imagenes/Icono Regresar.png" alt="Regresar atrás" class="back-button">
-    </a>
-    
-    <div class="menu-container">
-        <div class="menu-item">
-            <a href="Hamburguesa de Ternera.html">
-                <img src="Imagenes/Comidas/Hamburguesa Ternera.jpg" alt="100% Ternera">
-                <p>100% Ternera - 5,00€</p>
-            </a>
+    <div class="back-button-container">
+        <a href="javascript:history.back()" class="back-button">
+            <img src="Imagenes/Icono Regresar.png" alt="Volver atrás">
+        </a>
+    </div>
+
+    <div class="section">
+        <div class="row">
+            <div class="category">
+                <a href="Hamburguesa Ternera.html">
+                    <img src="Imagenes/Comidas/Hamburguesa Ternera.jpg" alt="Hamburguesa Ternera">
+                </a>
+                <a href="Hamburguesa Ternera.html">Hamburguesa Ternera</a>
+            </div>
+            <div class="category">
+                <a href="Hamburguesa Pollo Empanado.html">
+                    <img src="Imagenes/Comidas/Hamburguesa Pollo Empanado.jpg" alt="Hamburguesa Pollo Empanado">
+                </a>
+                <a href="Hamburguesa Pollo Empanado.html">Hamburguesa Pollo Empanado</a>
+            </div>
         </div>
-        <div class="menu-item">
-            <a href="Hamburguesa Pollo Empanado.html">
-                <img src="Imagenes/Comidas/Hamburguesa Pollo Empanado.jpg" alt="Pollo Empanado">
-                <p>Pollo Empanado - 4,50€</p>
-            </a>
-        </div>
-        <div class="menu-item">
-            <a href="Hamburguesa Vegetariana.html">
-                <img src="Imagenes/Comidas/Hamburguesa Vegetariana.jpg" alt="Vegetariana">
-                <p>Vegetariana - 4,50€</p>
-            </a>
+        <div class="row">
+            <div class="category">
+                <a href="Hamburguesa Vegetariana.html">
+                    <img src="Imagenes/Comidas/Hamburguesa Vegetariana.jpg" alt="Hamburguesa Vegetariana">
+                </a>
+                <a href="Hamburguesa Vegetariana.html">Hamburguesa Vegetariana</a>
+            </div>
         </div>
     </div>
+
+    <footer>&copy; 2025 Bar Aldea Bella | Todos los derechos reservados</footer>
 </body>
 </html>
