@@ -11,6 +11,9 @@
             margin: 0;
             padding: 0;
             background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Esto asegura que el contenido ocupe toda la altura de la pantalla */
         }
         header {
             background-color: #E60012;
@@ -50,6 +53,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            flex-grow: 1; /* Esto hace que la sección principal ocupe el espacio disponible */
         }
         .row {
             display: flex;
@@ -90,6 +94,7 @@
             color: white;
             text-align: center;
             padding: 10px;
+            margin-top: auto; /* Esto empuja el pie de página al fondo */
         }
     </style>
 </head>
