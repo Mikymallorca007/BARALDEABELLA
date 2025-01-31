@@ -32,8 +32,6 @@
             text-align: center;
         }
         .cart-clear {
-            position: absolute;
-            right: 20px;
             width: 40px;
             height: 40px;
             cursor: pointer;
@@ -99,20 +97,29 @@
 
     <div class="cart-container">
         <div id="cart-items"></div>
-
         <button onclick="continuarComprando()">Continuar Comprando</button>
-
         <a id="whatsapp-link" href="#" class="whatsapp-button" target="_blank">
             Enviar por WhatsApp
         </a>
     </div>
 
     <script>
-        let Carrito = JSON.parse(localStorage.getItem('Carrito')) || [];
+        // Función para obtener el carrito desde el localStorage
+        function obtenerCarrito() {
+            const carritoStorage = localStorage.getItem('Carrito');
+            return carritoStorage ? JSON.parse(carritoStorage) : [];
+        }
 
+        // Función para actualizar el carrito en el localStorage
+        function actualizarCarrito(carrito) {
+            localStorage.setItem('Carrito', JSON.stringify(carrito));
+        }
+
+        // Función para mostrar los artículos del carrito
         function mostrarCarrito() {
             const cartItemsContainer = document.getElementById('cart-items');
             cartItemsContainer.innerHTML = ''; 
+            const Carrito = obtenerCarrito();
             let totalPedido = 0; 
             let detallePedido = ''; 
 
@@ -142,22 +149,35 @@
             }
 
             const mensaje = `¡Hola! Quiero hacer un pedido.\n\n${detallePedido}\nTotal: ${totalPedido.toFixed(2)}€`;
-
             const whatsappLink = document.getElementById('whatsapp-link');
             whatsappLink.href = `https://wa.me/34652399666?text=${encodeURIComponent(mensaje)}`;
         }
 
+        // Función para vaciar el carrito de forma total
         function vaciarCarrito() {
-            localStorage.removeItem('Carrito'); // Eliminar el carrito del almacenamiento local
-            Carrito = []; // Limpiar la variable Carrito en el script
-            mostrarCarrito(); // Mostrar el carrito vacío en la página
+            // Limpiar el carrito del localStorage
+            localStorage.removeItem('Carrito');
+            // Redibujar el carrito vacío
+            mostrarCarrito();
         }
 
+        // Función para continuar comprando
         function continuarComprando() {
-            history.back(); 
+            // Actualizar el carrito para reflejar los cambios antes de retroceder
+            const Carrito = obtenerCarrito();
+            if (Carrito.length === 0) {
+                // Si el carrito está vacío, ir al inicio
+                window.location.href = 'index.html';
+            } else {
+                // Si el carrito no está vacío, volver a la página anterior
+                history.back();
+            }
         }
 
-        window.onload = mostrarCarrito;
+        // Mostrar el carrito cuando se carga la página
+        window.onload = function() {
+            mostrarCarrito(); // Mostrar el carrito al cargar la página
+        }
     </script>
 </body>
 </html>
