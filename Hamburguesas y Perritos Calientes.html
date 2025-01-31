@@ -26,13 +26,13 @@
             position: relative;
             text-align: center; /* Asegura que todo el contenido en el header esté centrado */
         }
-        .back-button {
+        .go-home-button {
             position: absolute;
-            left: 20px;
+            left: 20px; /* Lo desplaza a la izquierda */
             top: 50%;
             transform: translateY(-50%);
         }
-        .back-button img {
+        .go-home-button img {
             width: 50px;
             height: 50px;
             cursor: pointer;
@@ -46,6 +46,17 @@
         .cart-icon {
             width: 50px;
             height: 50px;
+            cursor: pointer;
+        }
+        .back-button-container {
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            background-color: #E60012;
+        }
+        .back-button img {
+            width: 40px; /* Ajusté el tamaño del botón */
+            height: 40px;
             cursor: pointer;
         }
         .section {
@@ -101,7 +112,8 @@
 </head>
 <body>
     <header>
-        <a href="index.html" class="back-button">
+        <!-- Botón para Volver al Inicio (Ahora a la izquierda) -->
+        <a href="index.html" class="go-home-button">
             <img src="Imagenes/Icono INICIO.jpg" alt="Volver al Inicio">
         </a>
       
@@ -115,6 +127,13 @@
             </a>
         </div>
     </header>
+
+    <!-- Botón para Volver atrás centrado debajo del header con tamaño más pequeño -->
+    <div class="back-button-container">
+        <a href="javascript:history.back()" class="back-button">
+            <img src="Imagenes/Icono Regresar.png" alt="Volver atrás">
+        </a>
+    </div>
 
     <div class="section">
         <div class="row">
@@ -132,6 +151,10 @@
             </div>
         </div>
     </div>
+
+    <footer>&copy; 2025 Bar Aldea Bella | Todos los derechos reservados</footer>
+</body>
+</html>
 
     <footer>&copy; 2025 Bar Aldea Bella | Todos los derechos reservados</footer>
 </body>
