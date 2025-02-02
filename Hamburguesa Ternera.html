@@ -28,11 +28,13 @@
             display: flex;
             align-items: center; /* Centra verticalmente el icono */
         }
-        .header-left img {
-            width: 40px;
-            height: auto;
-            margin-right: 10px;
-        }
+       .header-left img {
+       width: 40px;
+       height: auto;                        -------------------------------------------------------------------------------
+       margin-right: 5px;
+       position: relative;
+      top: -5px; /* Ajusta este valor para subirlo */
+}
         .content-container {
             display: flex;
             justify-content: center;
@@ -48,6 +50,7 @@
             width: 150px;
             height: auto;
             border-radius: 10px;
+            margin-top: -40px; /* Ajusta este valor según necesites */
         }
         .extras-container {
             flex: 1;
@@ -66,10 +69,13 @@
             font-size: 1.1em;
         }
         .back-button {
-            display: block;
-            margin: 20px auto;
-            width: 60px;
-        }
+        display: block;
+        margin: 10px; /* Ajusta el margen según sea necesario */
+        width: 50px;
+        position: absolute; /* Para colocarlo en una posición específica */ ----------------------------------------------------------------------------------------
+        left: 20px; /* Ajusta la distancia desde la izquierda */
+        top: 120px; /* Ajusta la distancia desde la parte superior */
+}
         button {
             background-color: #4CAF50;
             color: white;
