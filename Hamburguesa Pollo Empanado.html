@@ -20,18 +20,21 @@
             font-size: 2em;
             display: flex;
             align-items: center;
-            justify-content: center; /* Centra el texto en el header */
+            justify-content: center;
+            position: relative;
         }
         .header-left {
             position: absolute;
-            left: 20px; /* Coloca el icono a la izquierda */
+            left: -10px;
             display: flex;
-            align-items: center; /* Centra verticalmente el icono */
+            align-items: center;
         }
         .header-left img {
             width: 40px;
             height: auto;
-            margin-right: 10px;
+            margin-right: 5px;
+            position: relative;
+            top: -5px;
         }
         .content-container {
             display: flex;
@@ -43,11 +46,13 @@
         .image-container {
             flex: 1;
             text-align: center;
+            margin-top: 20px; /* Margen superior añadido para separar la imagen del header */
         }
         .image-container img {
-            width: 300px;
+            width: 150px;
             height: auto;
             border-radius: 10px;
+            margin-top: -40px;
         }
         .extras-container {
             flex: 1;
@@ -67,8 +72,11 @@
         }
         .back-button {
             display: block;
-            margin: 20px auto;
-            width: 60px;
+            margin: 10px;
+            width: 50px;
+            position: absolute;
+            left: 20px;
+            top: 120px;
         }
         button {
             background-color: #4CAF50;
@@ -82,8 +90,6 @@
         button:hover {
             background-color: #45a049;
         }
-
-        /* Estilo del mensaje de confirmación */
         #confirmation-message {
             display: none;
             color: green;
@@ -95,14 +101,10 @@
             border-radius: 10px;
             animation: mostrarMensaje 1s ease-out;
         }
-
-        /* Animación para el mensaje de confirmación */
         @keyframes mostrarMensaje {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-
-        /* Imagen "Enviando al carrito" que ocupa toda la pantalla */
         #sending-image {
             display: none;
             position: fixed;
@@ -110,12 +112,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Hace que la imagen cubra todo el fondo */
+            object-fit: cover;
             z-index: 1000;
-            background-color: rgba(0, 0, 0, 0.7); /* Agrega un fondo semitransparente */
+            background-color: rgba(0, 0, 0, 0.7);
         }
-
-        /* Animación para el icono del carrito */
         .cart-icon {
             position: absolute;
             top: 20px;
@@ -124,18 +124,14 @@
             cursor: pointer;
             transition: transform 0.3s ease;
         }
-
         .cart-icon.added {
-            transform: scale(1.1); /* Aumenta el tamaño del icono */
+            transform: scale(1.1);
             animation: iconAnim 0.5s ease-out;
         }
-
         @keyframes iconAnim {
             0% { transform: scale(1); }
             100% { transform: scale(1.1); }
         }
-
-        /* Estilo para el botón */
         button:active {
             background-color: #45a049;
         }
@@ -144,7 +140,6 @@
 <body>
     <header>
         <div class="header-left">
-            <!-- Icono Volver a Inicio centrado verticalmente -->
             <a href="index.html">
                 <img src="Imagenes/Icono INICIO.jpg" alt="Volver" class="back-button">
             </a>
@@ -154,7 +149,6 @@
         </div>
     </header>
     
-    <!-- Botón Regresar atrás -->
     <a href="javascript:history.back()">
         <img src="Imagenes/Icono Regresar.png" alt="Regresar atrás" class="back-button">
     </a>
@@ -173,26 +167,21 @@
             <label><input type="checkbox" id="extra6"> Cebolla - 0,20€</label>
             <label><input type="checkbox" id="extra7"> Lechuga - 0,20€</label>
             
-            <!-- Botón para agregar al Carrito -->
             <button onclick="agregarAlCarrito()">Agregar al Carrito</button>
 
-            <!-- Mensaje de confirmación -->
             <div id="confirmation-message">Producto agregado al Carrito.</div>
         </div>
     </div>
 
-    <!-- Imagen de "Enviando al carrito" -->
     <img id="sending-image" src="Imagenes/Enviando a carrito.jpeg" alt="Enviando al carrito">
 
-    <!-- Icono del Carrito -->
     <a href="Carrito.html">
         <img src="Imagenes/Carrito.png" alt="Ver Carrito" class="cart-icon">
     </a>
 
     <script>
-        let Carrito = JSON.parse(localStorage.getItem('Carrito')) || []; // Leer Carrito desde almacenamiento local
+        let Carrito = JSON.parse(localStorage.getItem('Carrito')) || [];
 
-        // Función para deseleccionar los extras
         function deseleccionarExtras() {
             const checkboxes = document.querySelectorAll('input[type="checkbox"]');
             checkboxes.forEach(checkbox => {
@@ -200,14 +189,12 @@
             });
         }
 
-        // Llamar a la función cuando se cargue la página
         window.onload = function() {
-            deseleccionarExtras(); // Desmarcar los extras al cargar la página
+            deseleccionarExtras();
         };
 
-        // Función para agregar al Carrito
         function agregarAlCarrito() {
-            const producto = "Hamburguesa de Pollo Empanado";
+            const producto = "Hamburguesa Pollo Empanado";
             const precioBase = 5.80;
 
             let extras = [];
@@ -251,38 +238,13 @@
                 precioTotal: precioTotal
             };
 
-            // Agregar el producto al carrito
             Carrito.push(item);
-            localStorage.setItem('Carrito', JSON.stringify(Carrito)); // Guardar Carrito en almacenamiento local
+            localStorage.setItem('Carrito', JSON.stringify(Carrito));
 
-            // Mostrar el mensaje de confirmación
             let message = document.getElementById("confirmation-message");
             message.style.display = "block";
 
-            // Ocultar el mensaje después de 3 segundos
-            setTimeout(function() {
-                message.style.display = "none";
-            }, 3000);
-
-            // Mostrar la imagen "Enviando a carrito" durante 3 segundos
-            let sendingImage = document.getElementById("sending-image");
-            sendingImage.style.display = "block";
-
-            setTimeout(function() {
-                sendingImage.style.display = "none";
-            }, 3000);
-
-            // Cambiar visualmente el carrito
-            let cartIcon = document.querySelector(".cart-icon");
-            cartIcon.classList.add("added");
-
-            // Restablecer el icono del carrito después de 1 segundo
-            setTimeout(function() {
-                cartIcon.classList.remove("added");
-            }, 1000);
-
-            // Deseleccionar los extras después de agregar al Carrito
-            deseleccionarExtras();
+            setTimeout(() => { message.style.display = "none"; }, 3000);
         }
     </script>
 </body>
