@@ -145,14 +145,14 @@
             </a>
         </div>
         <div>
-            Hamburguesa<br>Vegetariana
+            Hamburguesa<br>De Vegetariana
         </div>
     </header>
-    
+
     <a href="javascript:history.back()">
         <img src="Imagenes/Icono Regresar.png" alt="Regresar atrás" class="back-button">
     </a>
-    
+
     <div class="content-container">
         <div class="image-container">
             <img src="Imagenes/Comidas/Hamburguesa Vegetariana.jpg" alt="Hamburguesa Vegetariana">
@@ -194,7 +194,7 @@
         };
 
         function agregarAlCarrito() {
-            const producto = "Hamburguesa Vegetariana";
+            const producto = "Hamburguesa de Vegetariana";
             const precioBase = 5.80;
 
             let extras = [];
@@ -241,17 +241,24 @@
             Carrito.push(item);
             localStorage.setItem('Carrito', JSON.stringify(Carrito));
 
+            // Mostrar mensaje de confirmación
             let message = document.getElementById("confirmation-message");
             message.style.display = "block";
+            setTimeout(() => { message.style.display = "none"; }, 3000);
 
-            // Mostrar imagen "Enviando a carrito" por unos segundos
+            // Llamar a la función para mostrar la imagen "Enviando a carrito"
+            mostrarImagenEnvio();
+
+            // Llamar a la función para deseleccionar los extras
+            deseleccionarExtras();
+        }
+
+        function mostrarImagenEnvio() {
             let sendingImage = document.getElementById("sending-image");
-            sendingImage.style.display = "block";
-
+            sendingImage.style.display = "block"; // Mostrar la imagen
             setTimeout(() => { 
-                sendingImage.style.display = "none"; 
-                message.style.display = "none"; 
-            }, 3000); // Desaparece después de 3 segundos
+                sendingImage.style.display = "none"; // Ocultar la imagen después de 3 segundos
+            }, 3000);
         }
     </script>
 </body>
