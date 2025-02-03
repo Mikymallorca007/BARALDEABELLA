@@ -46,7 +46,7 @@
         .image-container {
             flex: 1;
             text-align: center;
-            margin-top: 20px; /* Margen superior añadido para separar la imagen del header */
+            margin-top: 20px;
         }
         .image-container img {
             width: 150px;
@@ -145,14 +145,14 @@
             </a>
         </div>
         <div>
-            Hamburguesa<br>Pollo Empanado
+            Hamburguesa<br>De Pollo Empanado
         </div>
     </header>
-    
+
     <a href="javascript:history.back()">
         <img src="Imagenes/Icono Regresar.png" alt="Regresar atrás" class="back-button">
     </a>
-    
+
     <div class="content-container">
         <div class="image-container">
             <img src="Imagenes/Comidas/Hamburguesa Pollo Empanado.jpg" alt="Hamburguesa Pollo Empanado">
@@ -194,7 +194,7 @@
         };
 
         function agregarAlCarrito() {
-            const producto = "Hamburguesa Pollo Empanado";
+            const producto = "Hamburguesa de Pollo Empanado";
             const precioBase = 5.80;
 
             let extras = [];
@@ -241,10 +241,21 @@
             Carrito.push(item);
             localStorage.setItem('Carrito', JSON.stringify(Carrito));
 
+            // Mostrar mensaje de confirmación
             let message = document.getElementById("confirmation-message");
             message.style.display = "block";
-
             setTimeout(() => { message.style.display = "none"; }, 3000);
+
+            // Llamar a la función para mostrar la imagen "Enviando a carrito"
+            mostrarImagenEnvio();
+        }
+
+        function mostrarImagenEnvio() {
+            let sendingImage = document.getElementById("sending-image");
+            sendingImage.style.display = "block"; // Mostrar la imagen
+            setTimeout(() => { 
+                sendingImage.style.display = "none"; // Ocultar la imagen después de 3 segundos
+            }, 3000);
         }
     </script>
 </body>
