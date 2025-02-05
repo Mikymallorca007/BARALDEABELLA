@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanwich<br>Solo York</title>
+    <title>Sandwich<br>York &</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -40,32 +40,27 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-            padding: 20px;
+            flex-wrap: wrap;
+            padding: 30px;
         }
         .image-container {
-            margin-top: 0; /* Mueve la imagen más arriba */
+            flex: 1;
+            text-align: center;
+            margin-top: 20px;
         }
         .image-container img {
             width: 150px;
             height: auto;
             border-radius: 10px;
-            display: block; /* Asegura que la imagen se comporte como un bloque */
-            margin-left: auto; /* Centra la imagen horizontalmente */
-            margin-right: auto; /* Centra la imagen horizontalmente */
+            margin-top: -40px;
         }
         .extras-container {
+            flex: 1;
             background: #f8f8f8;
             padding: 20px;
             border-radius: 10px;
-            text-align: left;
+            text-align: center;
             max-width: 300px;
-            margin-top: 20px; /* Añade un margen superior para separar los extras de la imagen */
-        }
-        .extras-container label {
-            display: block;
-            margin: 5px 0;
-            font-size: 1.1em;
         }
         .back-button {
             display: block;
@@ -87,21 +82,6 @@
         button:hover {
             background-color: #45a049;
         }
-        #confirmation-message {
-            display: none;
-            color: green;
-            font-size: 1.3em;
-            font-weight: bold;
-            margin-top: 20px;
-            background-color: rgba(0, 255, 0, 0.2);
-            padding: 10px;
-            border-radius: 10px;
-            animation: mostrarMensaje 1s ease-out;
-        }
-        @keyframes mostrarMensaje {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
         #sending-image {
             display: none;
             position: fixed;
@@ -121,28 +101,17 @@
             cursor: pointer;
             transition: transform 0.3s ease;
         }
-        .cart-icon.added {
-            transform: scale(1.1);
-            animation: iconAnim 0.5s ease-out;
-        }
-        @keyframes iconAnim {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.1); }
-        }
-        button:active {
-            background-color: #45a049;
-        }
     </style>
 </head>
 <body>
     <header>
         <div class="header-left">
-            <a href="../../index.html">
+            <a href="index.html">
                 <img src="../../Imagenes/Icono INICIO.jpg" alt="Volver" class="back-button">
             </a>
         </div>
         <div>
-            Sandwich<br> Solo York
+            Sandwich<br>York &
         </div>
     </header>
 
@@ -152,69 +121,45 @@
 
     <div class="content-container">
         <div class="image-container">
-            <img src="Imagenes Sandwiches/Sandwich Solo York.jpg" alt="Sandwich Solo York">
+            <img src="Imagenes Sandwiches/Sandwich York &.jpg" alt="Sandwich York &">
         </div>
         <div class="extras-container">
-            <label>Ingredientes: Solo York.</label>
-            
-           <div class="button-container" style="display: flex; justify-content: center; margin-top: 20px;">
-    <button onclick="agregarAlCarrito()">Agregar al Carrito</button>
-</div>
-
-
-
-            <div id="confirmation-message">Producto agregado al Carrito.</div>
+            <p>Solo York.</p>
+            <button onclick="agregarAlCarrito()">Agregar al Carrito</button>
         </div>
     </div>
 
     <img id="sending-image" src="../../Imagenes/Enviando a carrito.jpeg" alt="Enviando al carrito">
-    
-     <a href="../../Carrito.html">
+
+    <a href="Carrito.html">
         <img src="../../Imagenes/Carrito.png" alt="Ver Carrito" class="cart-icon">
     </a>
 
     <script>
         let Carrito = JSON.parse(localStorage.getItem('Carrito')) || [];
 
-        window.onload = function() {
-            // No es necesario deseleccionar extras ya que ya no los estamos manejando.
-        };
-
         function agregarAlCarrito() {
-            const producto = "Sandwich Solo York";
-            const precioBase = 2.0;
-
-            // Ingredientes fijos para el sandwich
-            let extras = ["Solo York"."]; 
-            let precioExtras = 0; // No hay precio adicional por extras, se mantiene en 0
-
-            let precioTotal = precioBase + precioExtras;
-
+            const producto = "Sandwich York &";
+            const precioBase = 2.00;
+            
             let item = {
                 nombre: producto,
-                extras: extras,
                 precioBase: precioBase,
-                precioTotal: precioTotal
+                precioTotal: precioBase
             };
 
             Carrito.push(item);
             localStorage.setItem('Carrito', JSON.stringify(Carrito));
-
-            // Mostrar mensaje de confirmación
-            let message = document.getElementById("confirmation-message");
-            message.style.display = "block";
-            setTimeout(() => { message.style.display = "none"; }, 3000);
-
-            // Llamar a la función para mostrar la imagen "Enviando a carrito"
+            
             mostrarImagenEnvio();
         }
 
         function mostrarImagenEnvio() {
             let sendingImage = document.getElementById("sending-image");
-            sendingImage.style.display = "block"; // Mostrar la imagen
+            sendingImage.style.display = "block";
             setTimeout(() => { 
-                sendingImage.style.display = "none"; // Ocultar la imagen después de 3 segundos
-            }, 3000);
+                sendingImage.style.display = "none";
+            }, 1000);
         }
     </script>
 </body>
