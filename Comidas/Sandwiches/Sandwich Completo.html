@@ -200,12 +200,7 @@
 
             Carrito.push(item);
             localStorage.setItem('Carrito', JSON.stringify(Carrito));
-
-            // Mostrar mensaje de confirmación
-            let message = document.getElementById("confirmation-message");
-            message.style.display = "block";
-            setTimeout(() => { message.style.display = "none"; }, 3000);
-
+           
             // Llamar a la función para mostrar la imagen "Enviando a carrito"
             mostrarImagenEnvio();
         }
