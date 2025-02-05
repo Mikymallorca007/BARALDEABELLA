@@ -125,6 +125,7 @@
         </div>
         <div class="extras-container">
             <p>Solo York.</p>
+            <button onclick="agregarAlCarrito()">Agregar al Carrito</button>
         </div>
     </div>
 
@@ -133,5 +134,33 @@
     <a href="Carrito.html">
         <img src="../../Imagenes/Carrito.png" alt="Ver Carrito" class="cart-icon">
     </a>
+
+    <script>
+        let Carrito = JSON.parse(localStorage.getItem('Carrito')) || [];
+
+        function agregarAlCarrito() {
+            const producto = "Sandwich York &";
+            const precioBase = 2.00;
+            
+            let item = {
+                nombre: producto,
+                precioBase: precioBase,
+                precioTotal: precioBase
+            };
+
+            Carrito.push(item);
+            localStorage.setItem('Carrito', JSON.stringify(Carrito));
+            
+            mostrarImagenEnvio();
+        }
+
+        function mostrarImagenEnvio() {
+            let sendingImage = document.getElementById("sending-image");
+            sendingImage.style.display = "block";
+            setTimeout(() => { 
+                sendingImage.style.display = "none";
+            }, 1000);
+        }
+    </script>
 </body>
 </html>
