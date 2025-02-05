@@ -59,16 +59,8 @@
             background: #f8f8f8;
             padding: 20px;
             border-radius: 10px;
-            text-align: left;
-            max-width: 300px;
-        }
-        .extras-container h2 {
             text-align: center;
-        }
-        .extras-container label {
-            display: block;
-            margin: 5px 0;
-            font-size: 1.1em;
+            max-width: 300px;
         }
         .back-button {
             display: block;
@@ -132,11 +124,7 @@
             <img src="Imagenes Sandwiches/Sandwich York &.jpg" alt="Sandwich York &">
         </div>
         <div class="extras-container">
-            <h2>Elige tus ingredientes extra:</h2>
-            <label><input type="checkbox" id="extra1"> Cebolla - 0,20€</label>
-            <label><input type="checkbox" id="extra2"> Tomate - 0,20€</label>
-            
-            <button onclick="agregarAlCarrito()">Agregar al Carrito</button>
+            <p>Solo York.</p>
         </div>
     </div>
 
@@ -145,69 +133,5 @@
     <a href="Carrito.html">
         <img src="../../Imagenes/Carrito.png" alt="Ver Carrito" class="cart-icon">
     </a>
-
-    <script>
-        let Carrito = JSON.parse(localStorage.getItem('Carrito')) || [];
-
-        function deseleccionarExtras() {
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = false;
-            });
-        }
-
-        window.onload = function() {
-            deseleccionarExtras();
-        };
-
-        function agregarAlCarrito() {
-            const producto = "Sandwich York &";
-            const precioBase = 2.00;
-
-            let extras = [];
-            let precioExtras = 0;
-
-            if (document.getElementById("extra1").checked) {
-                extras.push("Cebolla");
-                precioExtras += 0.20;
-            }
-            if (document.getElementById("extra2").checked) {
-                extras.push("Tomate");
-                precioExtras += 0.20;
-            }
-
-            // Verifica si se seleccionó al menos un extra
-            if (extras.length === 0) {
-                alert("Debes seleccionar al menos un ingrediente extra.");
-                return; // Detiene la ejecución si no hay extras seleccionados
-            }
-
-            let precioTotal = precioBase + precioExtras;
-
-            let item = {
-                nombre: producto,
-                extras: extras,
-                precioBase: precioBase,
-                precioTotal: precioTotal
-            };
-
-            Carrito.push(item);
-            localStorage.setItem('Carrito', JSON.stringify(Carrito));
-
-            // Llamar a la función para mostrar la imagen "Enviando a carrito"
-            mostrarImagenEnvio();
-
-            // Llamar a la función para deseleccionar los extras
-            deseleccionarExtras();
-        }
-
-        function mostrarImagenEnvio() {
-            let sendingImage = document.getElementById("sending-image");
-            sendingImage.style.display = "block"; // Mostrar la imagen
-            setTimeout(() => { 
-                sendingImage.style.display = "none"; // Ocultar la imagen después de 1 segundo
-            }, 1000);
-        }
-    </script>
 </body>
 </html>
