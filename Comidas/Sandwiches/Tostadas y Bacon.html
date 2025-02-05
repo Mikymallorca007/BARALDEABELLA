@@ -130,12 +130,12 @@
 
     <div class="content-container">
         <div class="image-container">
-            <img src="Imagenes Sandwiches/Tostada Bacon &.jpg" alt="Sandwich York &">
+            <img src="Imagenes Sandwiches/Tostada bacon &.jpg" alt="Tostada bacon &">
         </div>
         <div class="extras-container">
             <h2>Elige tus ingredientes extra:</h2>
-            <label><input type="checkbox" id="extra1"> Con Mantequilla</label>
-            <label><input type="checkbox" id="extra2"> Sin Mantequilla</label>
+            <label><input type="checkbox" id="extra1"> Con mantequilla</label>
+            <label><input type="checkbox" id="extra2"> Sin mantequilla</label>
             
             <button onclick="agregarAlCarrito()">Agregar al Carrito</button>
         </div>
@@ -162,18 +162,18 @@
         };
 
         function agregarAlCarrito() {
-            const producto = "Tostadas Bacon &";
+            const producto = "Tostadas bacon &";
             const precioBase = 3.20;
 
             let extras = [];
             let precioExtras = 0;
 
             if (document.getElementById("extra1").checked) {
-                extras.push("Con Mantequilla");
+                extras.push("Con mantequilla");
                 precioExtras += 0.00;
             }
             if (document.getElementById("extra2").checked) {
-                extras.push("NO Mantequilla");
+                extras.push("NO mantequilla");
                 precioExtras += 0.00;
             }
 
