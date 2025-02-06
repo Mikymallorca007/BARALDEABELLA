@@ -177,12 +177,6 @@
                 precioExtras += 0.00;
             }
 
-            // Verifica si se seleccionó al menos un extra
-            if (extras.length === 0) {
-                alert("Debes seleccionar al menos un ingrediente extra.");
-                return; // Detiene la ejecución si no hay extras seleccionados
-            }
-
             let precioTotal = precioBase + precioExtras;
 
             let item = {
