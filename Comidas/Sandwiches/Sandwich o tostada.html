@@ -73,25 +73,6 @@
         .back-button {
             display: block;
             margin: 10px;
-            width: 50px;
-            position: absolute;
-            left: 20px;
-            top: 120px;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 1.2em;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        #sending-image {
-            display: none;
             position: fixed;
             top: 0;
             left: 0;
@@ -203,6 +184,13 @@
         function agregarAlCarrito() {
             const precioTotal = document.getElementById("precioTotal").textContent;
 
+            // Obtenemos los ingredientes extras seleccionados
+            const extrasSeleccionados = [];
+            if (document.getElementById("york").checked) extrasSeleccionados.push("York");
+            if (document.getElementById("queso").checked) extrasSeleccionados.push("Queso");
+            if (document.getElementById("cebola").checked) extrasSeleccionados.push("Cebolla");
+            if (document.getElementById("tomate").checked) extrasSeleccionados.push("Tomate");
+
             // Verificar si el precio es válido antes de agregar al carrito
             if (precioTotal === "-") {
                 alert("Debes seleccionar ingredientes válidos.");
@@ -212,7 +200,8 @@
             let carrito = JSON.parse(localStorage.getItem('Carrito')) || [];
             let producto = {
                 nombre: "Sandwich York &",
-                precio: precioTotal
+                precioTotal: parseFloat(precioTotal),
+                extras: extrasSeleccionados // Guardamos los extras seleccionados
             };
 
             carrito.push(producto);
