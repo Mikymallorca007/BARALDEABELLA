@@ -108,62 +108,64 @@
     </div>
 
     <script>
-let Carrito = JSON.parse(localStorage.getItem('Carrito')) || [];
+        let Carrito = JSON.parse(localStorage.getItem('Carrito')) || [];
 
-function mostrarCarrito() {
-    const cartItemsContainer = document.getElementById('cart-items');
-    cartItemsContainer.innerHTML = ''; 
-    let totalPedido = 0; 
-    let detallePedido = ''; 
+        function mostrarCarrito() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            cartItemsContainer.innerHTML = ''; 
+            let totalPedido = 0; 
+            let detallePedido = ''; 
 
-    if (Carrito.length === 0) {
-        cartItemsContainer.innerHTML = '<p>No tienes productos en el Carrito.</p>';
-    } else {
-        Carrito.forEach(item => {
-            const itemDiv = document.createElement('div');
-            itemDiv.classList.add('cart-item');
+            if (Carrito.length === 0) {
+                cartItemsContainer.innerHTML = '<p>No tienes productos en el Carrito.</p>';
+            } else {
+                Carrito.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.classList.add('cart-item');
 
-            const itemInfo = document.createElement('div');
-            itemInfo.classList.add('item-info');
-            itemInfo.innerHTML = `<strong>${item.nombre}</strong><br>Extras: ${item.extras.join(', ')}`;
+                    const itemInfo = document.createElement('div');
+                    itemInfo.classList.add('item-info');
+                    itemInfo.innerHTML = `<strong>${item.nombre}</strong><br>Extras: ${item.extras.join(', ')}`;
 
-            const itemPrice = document.createElement('div');
-            itemPrice.classList.add('item-price');
-            itemPrice.innerHTML = `${item.precioTotal.toFixed(2)}€`;
+                    const itemPrice = document.createElement('div');
+                    itemPrice.classList.add('item-price');
+                    itemPrice.innerHTML = `${item.precioTotal.toFixed(2)}€`;
 
-            itemDiv.appendChild(itemInfo);
-            itemDiv.appendChild(itemPrice);
-            cartItemsContainer.appendChild(itemDiv);
+                    itemDiv.appendChild(itemInfo);
+                    itemDiv.appendChild(itemPrice);
+                    cartItemsContainer.appendChild(itemDiv);
 
-            detallePedido += `${item.nombre} - Extras: ${item.extras.join(', ')} - Precio: ${item.precioTotal.toFixed(2)}€\n`;
+                    detallePedido += `${item.nombre} - Extras: ${item.extras.join(', ')} - Precio: ${item.precioTotal.toFixed(2)}€\n`;
 
-            totalPedido += item.precioTotal; 
-        });
-    }
+                    totalPedido += item.precioTotal; 
+                });
+            }
 
-    const mensaje = `¡Hola! Quiero hacer un pedido.\n\n${detallePedido}\nTotal: ${totalPedido.toFixed(2)}€`;
+            const mensaje = `¡Hola! Quiero hacer un pedido.\n\n${detallePedido}\nTotal: ${totalPedido.toFixed(2)}€`;
 
-    const whatsappLink = document.getElementById('whatsapp-link');
-    whatsappLink.href = `https://wa.me/34652399666?text=${encodeURIComponent(mensaje)}`;
+            const whatsappLink = document.getElementById('whatsapp-link');
+            whatsappLink.href = `https://wa.me/34652399666?text=${encodeURIComponent(mensaje)}`;
+        }
 
-    whatsappLink.addEventListener('click', function () {
-        setTimeout(vaciarCarrito, 2000);
-    });
-}
+        function vaciarCarrito() {
+            localStorage.removeItem('Carrito'); // Eliminar del almacenamiento local
+            Carrito = []; // Vaciar el array en memoria
+            mostrarCarrito(); // Actualizar la interfaz
+            // Forzar recarga completa después de vaciar el carrito
+            setTimeout(() => {
+                window.location.reload(true); 
+            }, 100);
+        }
 
-function vaciarCarrito() {
-    localStorage.removeItem('Carrito'); // Eliminar del almacenamiento local
-    Carrito = []; // Vaciar el array en memoria
-    mostrarCarrito(); // Actualizar la interfaz
-}
+        function continuarComprando() {
+            window.location.href = "index.html"; // Redirigir a la página principal
+        }
 
-function continuarComprando() {
-    window.location.href = "index.html"; // Redirigir a la página principal
-}
+        window.onload = function () {
+            mostrarCarrito();
+        };
 
-window.onload = function () {
-    mostrarCarrito();
-};
+    </script>
 
 </body>
 </html>
