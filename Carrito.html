@@ -108,7 +108,7 @@
     </div>
 
     <script>
-        let Carrito = JSON.parse(sessionStorage.getItem('Carrito')) || [];
+        let Carrito = JSON.parse(localStorage.getItem('Carrito')) || [];
 
         function mostrarCarrito() {
             const cartItemsContainer = document.getElementById('cart-items');
@@ -147,26 +147,21 @@
             whatsappLink.href = `https://wa.me/34652399666?text=${encodeURIComponent(mensaje)}`;
         }
 
+        function vaciarCarrito() {
+            mostrarCarrito(); 
 
-function vaciarCarrito() {
-    // Mostrar los detalles del carrito antes de vaciarlo
-    mostrarCarrito(); // Mostrar los productos actuales del carrito
+            localStorage.removeItem('Carrito'); 
+            Carrito = []; 
 
-    // Eliminar el carrito de sessionStorage y vaciar el array en memoria
-    sessionStorage.removeItem('Carrito'); // Eliminar el carrito del sessionStorage
-    Carrito = []; // Vaciar la variable Carrito en memoria
+            mostrarCarrito(); 
 
-    // Actualizar la vista del carrito
-    mostrarCarrito(); // Llamar de nuevo a la función para actualizar la interfaz
-
-    // Forzar una recarga completa del navegador para eliminar la caché
-    setTimeout(() => {
-        window.location.reload(true); // Recargar la página de forma completa
-    }, 100); // Pequeña espera para asegurar que todo se actualice correctamente
-}
+            setTimeout(() => {
+                window.location.reload(true); 
+            }, 100); 
+        }
 
         function continuarComprando() {
-            window.location.href = "index.html"; // Redirigir manualmente
+            window.location.href = "index.html"; 
         }
 
         window.onload = function () {
