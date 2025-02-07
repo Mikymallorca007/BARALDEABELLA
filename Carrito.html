@@ -147,15 +147,15 @@
             whatsappLink.href = `https://wa.me/34652399666?text=${encodeURIComponent(mensaje)}`;
         }
 
-        function vaciarCarrito() {
-            localStorage.setItem('Carrito', JSON.stringify([])); // Guardar un array vacío en localStorage
-            Carrito = []; // Vaciar la variable en memoria
-            mostrarCarrito(); // Actualizar la vista
-            setTimeout(() => {
-                location.reload(); // Recargar la página para eliminar cualquier caché
-            }, 100); // Pequeña espera para asegurar que la memoria se limpia
-        }
 
+function vaciarCarrito() {
+    localStorage.removeItem('Carrito'); // Eliminar solo el item específico del localStorage
+    Carrito = []; // Vaciar la variable en memoria
+    mostrarCarrito(); // Actualizar la vista para que no queden elementos visuales
+
+    // Forzar la recarga completa de la página y limpiar cualquier caché
+    window.location.reload(true); // 'true' fuerza una recarga completa del sitio
+}
         function continuarComprando() {
             window.location.href = "index.html"; // Redirigir manualmente
         }
