@@ -147,18 +147,30 @@
             whatsappLink.href = `https://wa.me/34652399666?text=${encodeURIComponent(mensaje)}`;
         }
 
-        function vaciarCarrito() {
-        // Limpiar localStorage y la variable en memoria
-        localStorage.removeItem('Carrito');
-        Carrito = [];
+       function vaciarCarrito() {
+        try {
+            console.log("Vaciando el carrito...");
 
-        // Actualizar la vista del carrito inmediatamente
-        const cartItemsContainer = document.getElementById('cart-items');
-        cartItemsContainer.innerHTML = '<p>No tienes productos en el Carrito.</p>';
+            // Limpiar localStorage
+            localStorage.removeItem('Carrito');
 
-        // Actualizar el enlace de WhatsApp con un mensaje vacío
-        const whatsappLink = document.getElementById('whatsapp-link');
-        whatsappLink.href = `https://wa.me/34652399666?text=${encodeURIComponent("¡Hola! Quiero hacer un pedido.\n\nTotal: 0€")}`;
+            // Limpiar la variable en memoria
+            Carrito = [];
+
+            // Verificar si se borró correctamente
+            console.log("Estado de localStorage después de vaciar:", localStorage.getItem('Carrito'));
+
+            // Actualizar la vista del carrito
+            const cartItemsContainer = document.getElementById('cart-items');
+            cartItemsContainer.innerHTML = '<p>No tienes productos en el Carrito.</p>';
+
+            // Limpiar el enlace de WhatsApp
+            const whatsappLink = document.getElementById('whatsapp-link');
+            whatsappLink.href = `https://wa.me/34652399666?text=${encodeURIComponent("¡Hola! Quiero hacer un pedido.\n\nTotal: 0€")}`;
+
+        } catch (error) {
+            console.error("Error al vaciar el carrito:", error);
+        }
     }
 
         function continuarComprando() {
