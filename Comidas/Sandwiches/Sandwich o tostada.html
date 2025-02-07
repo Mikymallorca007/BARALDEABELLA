@@ -23,11 +23,60 @@
             justify-content: center;
             position: relative;
         }
+        .header-left {
+            position: absolute;
+            left: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .header-left img {
+            width: 40px;
+            height: auto;
+            margin-right: 5px;
+            position: relative;
+            top: -5px;
+        }
+        .content-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 30px;
+        }
+        .image-container {
+            flex: 1;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .image-container img {
+            width: 150px;
+            height: auto;
+            border-radius: 10px;
+            margin-top: -40px;
+        }
+        .extras-container {
+            flex: 1;
+            background: #f8f8f8;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+            max-width: 300px;
+        }
+        .extras-container h2 {
+            text-align: center;
+        }
+        .extras-container label {
+            display: block;
+            margin: 5px 0;
+            font-size: 1.1em;
+        }
         .back-button {
+            display: block;
             position: absolute;
             top: 150px;
             left: 20px;
             width: 40px;
+            height: 40px;
         }
         .cart-icon {
             position: absolute;
@@ -35,6 +84,7 @@
             right: 20px;
             width: 50px;
             cursor: pointer;
+            transition: transform 0.3s ease;
         }
         #precioTotal {
             font-size: 1.5em;
@@ -69,52 +119,24 @@
 </head>
 <body>
     <header>
-        <a href="../../index.html">
-            <img src="../../Imagenes/Icono INICIO.jpg" alt="Volver" class="back-button">
-        </a>
-        <div>Sandwich o Tostada</div>
-    </header>
-
-    <a href="javascript:history.back()">
-        <img src="../../Imagenes/Icono Regresar.png" alt="Regresar atrás" class="back-button">
-    </a>
-
-    <div class="content-container">
-        <div class="image-container">
-            <img src="Imagenes Sandwiches/Sandwich eleccion.jpg" alt="Sandwich York & Queso">
+        <div class="header-left">
+            <a href="../../index.html">
+                <img src="../../Imagenes/Icono INICIO.jpg" alt="Volver" class="back-button">
+            </a>
         </div>
-    </div>
-
+        <div>
+            Sandwich<br>o Tostada
+        </div>
+    </header>
     <img id="sending-image" src="../../Imagenes/Enviando a carrito.jpeg" alt="Enviando al carrito">
-
-    <a href="../../Carrito.html">
-        <img src="../../Imagenes/Carrito.png" alt="Ver Carrito" class="cart-icon">
-    </a>
-
     <script>
         function agregarAlCarrito() {
-            let precioTotal = "2.00"; // Valor de ejemplo, modificar según lógica real
-            let carrito = JSON.parse(localStorage.getItem('Carrito')) || [];
-            
-            let producto = {
-                nombre: "Sandwich/Tostada",
-                precioTotal: parseFloat(precioTotal)
-            };
-            
-            carrito.push(producto);
-            localStorage.setItem('Carrito', JSON.stringify(carrito));
-            
-            mostrarImagenEnvio();
-        }
-
-        function mostrarImagenEnvio() {
             let sendingImage = document.getElementById("sending-image");
             sendingImage.style.display = "block";
-            setTimeout(() => {
+            setTimeout(() => { 
                 sendingImage.style.display = "none";
             }, 1000);
         }
     </script>
 </body>
 </html>
-
