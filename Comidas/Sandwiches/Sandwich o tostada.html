@@ -23,60 +23,11 @@
             justify-content: center;
             position: relative;
         }
-        .header-left {
-            position: absolute;
-            left: 10px;
-            display: flex;
-            align-items: center;
-        }
-        .header-left img {
-            width: 40px;
-            height: auto;
-            margin-right: 5px;
-            position: relative;
-            top: -5px;
-        }
-        .content-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            padding: 30px;
-        }
-        .image-container {
-            flex: 1;
-            text-align: center;
-            margin-top: 20px;
-        }
-        .image-container img {
-            width: 150px;
-            height: auto;
-            border-radius: 10px;
-            margin-top: -40px;
-        }
-        .extras-container {
-            flex: 1;
-            background: #f8f8f8;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: left;
-            max-width: 300px;
-        }
-        .extras-container h2 {
-            text-align: center;
-        }
-        .extras-container label {
-            display: block;
-            margin: 5px 0;
-            font-size: 1.1em;
-        }
         .back-button {
-            display: block;
             position: absolute;
             top: 150px;
             left: 20px;
             width: 40px;
-            height: 40px;
         }
         .cart-icon {
             position: absolute;
@@ -84,7 +35,6 @@
             right: 20px;
             width: 50px;
             cursor: pointer;
-            transition: transform 0.3s ease;
         }
         #precioTotal {
             font-size: 1.5em;
@@ -104,19 +54,25 @@
         button:hover {
             background-color: #b7000e;
         }
+        #sending-image {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
     </style>
 </head>
 <body>
-
     <header>
-        <div class="header-left">
-            <a href="../../index.html">
-                <img src="../../Imagenes/Icono INICIO.jpg" alt="Volver" class="back-button">
-            </a>
-        </div>
-        <div>
-            Sandwich<br>o Tostada
-        </div>
+        <a href="../../index.html">
+            <img src="../../Imagenes/Icono INICIO.jpg" alt="Volver" class="back-button">
+        </a>
+        <div>Sandwich o Tostada</div>
     </header>
 
     <a href="javascript:history.back()">
@@ -125,18 +81,7 @@
 
     <div class="content-container">
         <div class="image-container">
-            <img src="Imagenes Sandwiches/Sandwich eleccion.jpg" alt="Sandwich York &">
-        </div>
-        <div class="extras-container">
-            <h2>Elige tus ingredientes:</h2>
-            <label><input type="checkbox" id="york"> York</label>
-            <label><input type="checkbox" id="queso"> Queso</label>
-            <label><input type="checkbox" id="cebola"> Cebolla</label>
-            <label><input type="checkbox" id="tomate"> Tomate</label><br>
-
-            <div id="precioTotal">-</div>
-
-            <button onclick="agregarAlCarrito()">Agregar al Carrito</button>
+            <img src="Imagenes Sandwiches/Sandwich eleccion.jpg" alt="Sandwich York & Queso">
         </div>
     </div>
 
@@ -147,87 +92,29 @@
     </a>
 
     <script>
-        // Combinaciones y precios válidos
-        const combinacionesPrecios = {
-            "York": 2.00,
-            "Queso": 2.00,
-            "Cebolla": null,
-            "Tomate": null,
-            "York,Queso": 2.00,
-            "York,Cebolla": 2.00,
-            "York,Tomate": 2.00,
-            "Queso,Cebolla": 2.00,
-            "Queso,Tomate": 2.00,
-            "Cebolla,Tomate": null,
-            "York,Queso,Cebolla": 2.20,
-            "York,Queso,Tomate": 2.20,
-            "York,Cebolla,Tomate": 2.20,
-            "Queso,Cebolla,Tomate": 2.20,
-            "York,Queso,Cebolla,Tomate": 2.40
-        };
-
-        // Función que calcula el precio de la selección de ingredientes
-        function calcularPrecio() {
-            // Obtenemos las casillas seleccionadas
-            const opcion1 = document.getElementById("york").checked ? "York" : "";
-            const opcion2 = document.getElementById("queso").checked ? "Queso" : "";
-            const opcion3 = document.getElementById("cebola").checked ? "Cebolla" : "";
-            const opcion4 = document.getElementById("tomate").checked ? "Tomate" : "";
-
-            // Concatenamos los ingredientes seleccionados
-            const seleccionados = [opcion1, opcion2, opcion3, opcion4].filter(item => item).join(",");
-
-            // Verificar si la combinación es válida y obtener el precio
-            let precioTotal = combinacionesPrecios[seleccionados] !== undefined ? combinacionesPrecios[seleccionados] : "*";
-            
-            // Mostrar el precio calculado
-            document.getElementById("precioTotal").textContent = precioTotal !== "-" ? precioTotal + " €" : "-";
-        }
-
-        // Actualizamos el precio automáticamente cuando se seleccione o deseleccione un ingrediente
-        document.querySelectorAll("input[type=checkbox]").forEach(checkbox => {
-            checkbox.addEventListener('change', calcularPrecio);
-        });
-
-        // Función para agregar el pedido al carrito
         function agregarAlCarrito() {
-            const precioTotal = document.getElementById("precioTotal").textContent;
-
-            // Obtenemos los ingredientes extras seleccionados
-            const extrasSeleccionados = [];
-            if (document.getElementById("york").checked) extrasSeleccionados.push("York");
-            if (document.getElementById("queso").checked) extrasSeleccionados.push("Queso");
-            if (document.getElementById("cebola").checked) extrasSeleccionados.push("Cebolla");
-            if (document.getElementById("tomate").checked) extrasSeleccionados.push("Tomate");
-
-            // Verificar si el precio es válido antes de agregar al carrito
-            if (precioTotal === "-") {
-                alert("Debes seleccionar ingredientes válidos.");
-                return;
-            }
-
+            let precioTotal = "2.00"; // Valor de ejemplo, modificar según lógica real
             let carrito = JSON.parse(localStorage.getItem('Carrito')) || [];
+            
             let producto = {
                 nombre: "Sandwich/Tostada",
-                precioTotal: parseFloat(precioTotal),
-                extras: extrasSeleccionados // Guardamos los extras seleccionados
+                precioTotal: parseFloat(precioTotal)
             };
-
+            
             carrito.push(producto);
             localStorage.setItem('Carrito', JSON.stringify(carrito));
-
-            // Mostrar la imagen de envío al carrito
+            
             mostrarImagenEnvio();
         }
 
         function mostrarImagenEnvio() {
             let sendingImage = document.getElementById("sending-image");
-            sendingImage.style.display = "block"; // Mostrar la imagen
-            setTimeout(() => { 
-                sendingImage.style.display = "none"; // Ocultar la imagen después de 1 segundo
+            sendingImage.style.display = "block";
+            setTimeout(() => {
+                sendingImage.style.display = "none";
             }, 1000);
         }
     </script>
-
 </body>
 </html>
+
