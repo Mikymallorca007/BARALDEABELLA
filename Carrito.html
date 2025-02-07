@@ -108,7 +108,8 @@
     </div>
 
     <script>
-        let Carrito = JSON.parse(localStorage.getItem('Carrito')) || [];
+let Carrito = JSON.parse(localStorage.getItem('Carrito')) || [];
+
 function mostrarCarrito() {
     const cartItemsContainer = document.getElementById('cart-items');
     cartItemsContainer.innerHTML = ''; 
@@ -145,47 +146,24 @@ function mostrarCarrito() {
     const whatsappLink = document.getElementById('whatsapp-link');
     whatsappLink.href = `https://wa.me/34652399666?text=${encodeURIComponent(mensaje)}`;
 
-    // 🚀 Nueva funcionalidad: Vaciar carrito después de enviar el mensaje
     whatsappLink.addEventListener('click', function () {
         setTimeout(vaciarCarrito, 2000);
     });
 }
-        
 
-       function vaciarCarrito() {
-        try {
-            console.log("Vaciando el carrito...");
+function vaciarCarrito() {
+    localStorage.removeItem('Carrito'); // Eliminar del almacenamiento local
+    Carrito = []; // Vaciar el array en memoria
+    mostrarCarrito(); // Actualizar la interfaz
+}
 
-            // Limpiar localStorage
-            localStorage.removeItem('Carrito');
+function continuarComprando() {
+    window.location.href = "index.html"; // Redirigir a la página principal
+}
 
-            // Limpiar la variable en memoria
-            Carrito = [];
-
-            // Verificar si se borró correctamente
-            console.log("Estado de localStorage después de vaciar:", localStorage.getItem('Carrito'));
-
-            // Actualizar la vista del carrito
-            const cartItemsContainer = document.getElementById('cart-items');
-            cartItemsContainer.innerHTML = '<p>No tienes productos en el Carrito.</p>';
-
-            // Limpiar el enlace de WhatsApp
-            const whatsappLink = document.getElementById('whatsapp-link');
-            whatsappLink.href = `https://wa.me/34652399666?text=${encodeURIComponent("¡Hola! Quiero hacer un pedido.\n\nTotal: 0€")}`;
-
-        } catch (error) {
-            console.error("Error al vaciar el carrito:", error);
-        }
-    }
-
-        function continuarComprando() {
-            window.location.href = "index.html"; 
-        }
-
-        window.onload = function () {
-            mostrarCarrito();
-        };
-    </script>
+window.onload = function () {
+    mostrarCarrito();
+};
 
 </body>
 </html>
