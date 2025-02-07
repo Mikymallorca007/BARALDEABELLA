@@ -108,7 +108,7 @@
     </div>
 
     <script>
-        let Carrito = JSON.parse(localStorage.getItem('Carrito')) || [];
+        let Carrito = JSON.parse(sessionStorage.getItem('Carrito')) || [];
 
         function mostrarCarrito() {
             const cartItemsContainer = document.getElementById('cart-items');
@@ -152,8 +152,8 @@ function vaciarCarrito() {
     // Mostrar los detalles del carrito antes de vaciarlo
     mostrarCarrito(); // Mostrar los productos actuales del carrito
 
-    // Eliminar el carrito de localStorage y vaciar el array en memoria
-    localStorage.removeItem('Carrito'); // Eliminar el carrito del localStorage
+    // Eliminar el carrito de sessionStorage y vaciar el array en memoria
+    sessionStorage.removeItem('Carrito'); // Eliminar el carrito del sessionStorage
     Carrito = []; // Vaciar la variable Carrito en memoria
 
     // Actualizar la vista del carrito
