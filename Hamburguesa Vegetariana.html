@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hamburguesa<br>Vegetariana</title>
+    <title>Hamburguesa<br>vegetariana</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -73,55 +73,6 @@
         .back-button {
             display: block;
             margin: 10px;
-            width: 50px;
-            position: absolute;
-            left: 20px;
-            top: 120px;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 1.2em;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        #confirmation-message {
-            display: none;
-            color: green;
-            font-size: 1.3em;
-            font-weight: bold;
-            margin-top: 20px;
-            background-color: rgba(0, 255, 0, 0.2);
-            padding: 10px;
-            border-radius: 10px;
-            animation: mostrarMensaje 1s ease-out;
-        }
-        @keyframes mostrarMensaje {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        #sending-image {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1000;
-            background-color: rgba(0, 0, 0, 0.7);
-        }
-        .cart-icon {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 50px;
-            cursor: pointer;
             transition: transform 0.3s ease;
         }
         .cart-icon.added {
@@ -145,7 +96,7 @@
             </a>
         </div>
         <div>
-            Hamburguesa<br>De Vegetariana
+            Hamburguesa<br>De vegetariana
         </div>
     </header>
 
@@ -155,7 +106,7 @@
 
     <div class="content-container">
         <div class="image-container">
-            <img src="Imagenes/Comidas/Hamburguesa Vegetariana.jpg" alt="Hamburguesa Vegetariana">
+            <img src="Imagenes/Comidas/Hamburguesa vegetariana.jpg" alt="Hamburguesa vegetariana">
         </div>
         <div class="extras-container">
             <h2>Elige tus ingredientes extra:</h2>
@@ -194,7 +145,7 @@
         };
 
         function agregarAlCarrito() {
-            const producto = "Hamburguesa de Vegetariana";
+            const producto = "Hamburguesa de vegetariana";
             const precioBase = 5.80;
 
             let extras = [];
