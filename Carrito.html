@@ -148,17 +148,18 @@
         }
 
         function vaciarCarrito() {
-            mostrarCarrito(); 
+        // Mostrar los detalles del carrito antes de vaciarlo
+        mostrarCarrito(); 
 
-            localStorage.removeItem('Carrito'); 
-            Carrito = []; 
+        // Limpiar localStorage y la variable en memoria
+        localStorage.removeItem('Carrito'); 
+        Carrito = [];
 
-            mostrarCarrito(); 
-
-            setTimeout(() => {
-                window.location.reload(true); 
-            }, 100); 
-        }
+        // Forzar una recarga sin caché
+        setTimeout(() => {
+            location.replace(location.href); // Evita usar caché del navegador
+        }, 100); 
+    }
 
         function continuarComprando() {
             window.location.href = "index.html"; 
