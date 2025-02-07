@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sandwich o Tostada</title>
+    <title>Sandwich o tostada</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -25,7 +25,7 @@
         }
         .header-left {
             position: absolute;
-            left: 10px;
+            left: -10px;
             display: flex;
             align-items: center;
         }
@@ -70,25 +70,49 @@
             margin: 5px 0;
             font-size: 1.1em;
         }
-      .back-button {
-       width: 40px;  /* Tamaño fijo */
-       height: auto; /* Mantiene la proporción */
-       position: absolute;
-      top: 150px;  /* Ajuste de posición */
-      left: 20px; /* Ajuste de posición */
-       }
+        .back-button {
+            display: block;
+            margin: 10px;
+            width: 50px;
+            position: absolute;
+            left: 20px;
+            top: 120px;
+        }
         button {
-            padding: 10px 20px;
-            background-color: #E60012;
+            background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 5px;
+            padding: 10px 20px;
             cursor: pointer;
+            border-radius: 5px;
             font-size: 1.2em;
-            margin-top: 10px;
         }
         button:hover {
-            background-color: #b7000e;
+            background-color: #45a049;
+        }
+        #sending-image {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .cart-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        #precioTotal {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -101,7 +125,7 @@
             </a>
         </div>
         <div>
-            Sandwich<br>o Tostada
+            Sandwich<br>o tostada
         </div>
     </header>
 
@@ -111,7 +135,7 @@
 
     <div class="content-container">
         <div class="image-container">
-            <img src="Imagenes Sandwiches/Sandwich Eleccion.jpg" alt="Sandwich York &">
+            <img src="Imagenes Sandwiches/Sandwich o tostada.jpg" alt="Sandwich o tostada">
         </div>
         <div class="extras-container">
             <h2>Elige tus ingredientes extra:</h2>
@@ -154,23 +178,18 @@
 
         // Función que calcula el precio de la selección de ingredientes
         function calcularPrecio() {
-            // Obtenemos las casillas seleccionadas
             const opcion1 = document.getElementById("york").checked ? "York" : "";
             const opcion2 = document.getElementById("queso").checked ? "Queso" : "";
             const opcion3 = document.getElementById("cebola").checked ? "Cebolla" : "";
             const opcion4 = document.getElementById("tomate").checked ? "Tomate" : "";
 
-            // Concatenamos los ingredientes seleccionados
             const seleccionados = [opcion1, opcion2, opcion3, opcion4].filter(item => item).join(",");
 
-            // Verificar si la combinación es válida y obtener el precio
             let precioTotal = combinacionesPrecios[seleccionados] !== undefined ? combinacionesPrecios[seleccionados] : "-";
             
-            // Mostrar el precio calculado
-            document.getElementById("precioTotal").textContent = precioTotal !== "-" ? precioTotal + " €" : "-";
+            document.getElementById("precioTotal").textContent = precioTotal;
         }
 
-        // Actualizamos el precio automáticamente cuando se seleccione o deseleccione un ingrediente
         document.querySelectorAll("input[type=checkbox]").forEach(checkbox => {
             checkbox.addEventListener('change', calcularPrecio);
         });
@@ -179,24 +198,16 @@
         function agregarAlCarrito() {
             const precioTotal = document.getElementById("precioTotal").textContent;
 
-            // Obtenemos los ingredientes extras seleccionados
-            const extrasSeleccionados = [];
-            if (document.getElementById("york").checked) extrasSeleccionados.push("York");
-            if (document.getElementById("queso").checked) extrasSeleccionados.push("Queso");
-            if (document.getElementById("cebola").checked) extrasSeleccionados.push("Cebolla");
-            if (document.getElementById("tomate").checked) extrasSeleccionados.push("Tomate");
-
             // Verificar si el precio es válido antes de agregar al carrito
-            if (precioTotal === "-") {
+            if (precioTotal === "-" || precioTotal === "") {
                 alert("Debes seleccionar ingredientes válidos.");
                 return;
             }
 
             let carrito = JSON.parse(localStorage.getItem('Carrito')) || [];
             let producto = {
-                nombre: "Sandwich/Tostada",
-                precioTotal: parseFloat(precioTotal),
-                extras: extrasSeleccionados // Guardamos los extras seleccionados
+                nombre: "Sandwich o tostada",
+                precio: parseFloat(precioTotal) // Convertir el precio a número
             };
 
             carrito.push(producto);
@@ -208,9 +219,9 @@
 
         function mostrarImagenEnvio() {
             let sendingImage = document.getElementById("sending-image");
-            sendingImage.style.display = "block"; // Mostrar la imagen
+            sendingImage.style.display = "block";
             setTimeout(() => { 
-                sendingImage.style.display = "none"; // Ocultar la imagen después de 1 segundo
+                sendingImage.style.display = "none"; 
             }, 1000);
         }
     </script>
