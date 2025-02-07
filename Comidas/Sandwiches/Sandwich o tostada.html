@@ -178,10 +178,10 @@
             const seleccionados = [opcion1, opcion2, opcion3, opcion4].filter(item => item).join(",");
 
             // Verificar si la combinación es válida y obtener el precio
-            let precioTotal = combinacionesPrecios[seleccionados] !== undefined ? combinacionesPrecios[seleccionados] : "-";
+            let precioTotal = combinacionesPrecios[seleccionados] !== undefined ? combinacionesPrecios[seleccionados] : "*";
             
             // Mostrar el precio calculado
-            document.getElementById("precioTotal").textContent = precioTotal;
+            document.getElementById("precioTotal").textContent = precioTotal !== "-" ? precioTotal + " €" : "-";
         }
 
         // Actualizamos el precio automáticamente cuando se seleccione o deseleccione un ingrediente
