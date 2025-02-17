@@ -46,7 +46,7 @@
         .image-container {
             flex: 1;
             text-align: center;
-            margin-top: 20px;
+            margin-top: 15px;
         }
         .image-container img {
             width: 150px;
@@ -57,13 +57,14 @@
         .extras-container {
             flex: 1;
             background: #f8f8f8;
-            padding: 20px;
+            padding: 10px;
             border-radius: 10px;
             text-align: left;
             max-width: 300px;
         }
         .extras-container h2 {
-            text-align: center;
+         text-align: center;
+         margin-top: 2px; /* Reducido para subir los títulos */
         }
         .extras-container label {
             display: block;
@@ -144,16 +145,18 @@
         <label><input type="checkbox" class="ingrediente" data-precio="1.50" value="Bacon"> Bacon</label>
         <label><input type="checkbox" class="ingrediente" data-precio="1.50" value="Pollo"> Pollo</label>
              
-        <h2>Elige el tamaño:</h2>
-        <select id="tamano" onchange="calcularPrecio()" style="margin-bottom: 20px;">
+<div style="text-align: right;">
+    <label for="tamano">Tamaño: 
+        <select id="tamano" onchange="calcularPrecio()">
             <option value="Mediana" data-precio="10.00">Mediana</option>
             <option value="Grande" data-precio="12.50">Grande</option>
         </select>
+    </label>
 
-        <label style="display: block; margin-top: 20px;">
-            <input type="checkbox" id="paraLlevar" data-precio="0.40" onchange="calcularPrecio()"> Para llevar (+0.40)
-        </label>
-
+    <label style="margin-top: 5px;">
+        <input type="checkbox" id="paraLlevar" data-precio="0.40" onchange="calcularPrecio()"> Para llevar (+0.40)
+    </label>
+</div>
         <label style="display: block; margin-top: 20px;">
             <div id="precioTotal">10.00 €</div>
             <button onclick="agregarAlCarrito()">Agregar al Carrito</button>
