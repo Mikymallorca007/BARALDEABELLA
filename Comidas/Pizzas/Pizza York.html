@@ -125,7 +125,7 @@
         </a>
     </div>
     <div>
-        Pizza<br>Jamón York
+        Pizza<br>York
     </div>
 </header>
 
@@ -148,7 +148,7 @@
 <div style="text-align: right;">
     <label for="tamano">Tamaño: 
         <select id="tamano" onchange="calcularPrecio()">
-            <option value="Mediana" data-precio="10.00">Mediana</option>
+            <option value="Mediana" data-precio="10.00">M</option>
             <option value="Grande" data-precio="12.50">Grande</option>
         </select>
     </label>
@@ -172,6 +172,7 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        limpiarSeleccion();
         document.querySelectorAll(".ingrediente, #paraLlevar").forEach(checkbox => {
             checkbox.addEventListener("change", calcularPrecio);
         });
@@ -193,7 +194,7 @@
     }
 
     function agregarAlCarrito() {
-        const producto = "Pizza Pepperoni";
+        const producto = "Pizza York";
         let extras = [];
         
         document.querySelectorAll(".ingrediente:checked").forEach(checkbox => {
@@ -207,7 +208,7 @@
             extras.push("Para llevar (+0.40)");
         }
 
-        if (extras.length === 0) {
+       if (extras.length === 0) {
             extras.push("-");
         }
 
@@ -216,20 +217,27 @@
         let carrito = JSON.parse(localStorage.getItem('Carrito')) || [];
         carrito.push({ nombre: `${producto} - ${tamanoTexto}`, extras, precioTotal });
         localStorage.setItem('Carrito', JSON.stringify(carrito));
-        
+
+        mostrarImagenEnvio();  // Muestra la imagen de envío al carrito
         limpiarSeleccion();
+    }
+
+    function mostrarImagenEnvio() {
+        let sendingImage = document.getElementById("sending-image");
+        sendingImage.style.display = "block"; 
+        setTimeout(() => { 
+            sendingImage.style.display = "none"; 
+        }, 1000);  // La imagen se oculta después de 1 segundo
     }
 
     function limpiarSeleccion() {
         document.querySelectorAll(".ingrediente, #paraLlevar").forEach(checkbox => checkbox.checked = false);
         document.getElementById("tamano").value = "Mediana";
         calcularPrecio();
-
-        // Reactivar el botón después de agregar al carrito
-        document.querySelector("button").disabled = false;
     }
-</script>
 
+    window.onload = limpiarSeleccion;
+</script>
 
 </body>
 </html>
