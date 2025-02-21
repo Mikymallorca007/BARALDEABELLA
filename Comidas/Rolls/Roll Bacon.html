@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAR ALDEA BELLA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            text-align: center;
+        }
+        header {
+            background-color: #E60012;
+            color: white;
+            padding: 20px;
+            font-size: 2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .header-left {
+            position: absolute;
+            left: -10px;
+            display: flex;
+            align-items: center;
+        }
+        .header-left img {
+            width: 40px;
+            height: auto;
+            margin-right: 5px;
+            position: relative;
+            top: -5px;
+        }
+        .content-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 30px;
+        }
+        .image-container {
+            flex: 1;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .image-container img {
+            width: 150px;
+            height: auto;
+            border-radius: 10px;
+            margin-top: -40px;
+        }
+        .extras-container {
+            flex: 1;
+            background: #f8f8f8;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+            max-width: 300px;
+        }
+        .extras-container h2 {
+            text-align: center;
+        }
+        .extras-container label {
+            display: block;
+            margin: 5px 0;
+            font-size: 1.1em;
+        }
+        .back-button {
+            display: block;
+            margin: 10px;
+            width: 50px;
+            position: absolute;
+            left: 20px;
+            top: 120px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1.2em;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #sending-image {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .cart-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        #precioTotal {
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: left;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <a href="../../index.html">
+                <img src="../../Imagenes/Iconos/Icono INICIO.jpg" alt="Volver" class="back-button">
+            </a>
+        </div>
+        <div>
+            Roll<br>Bacon
+        </div>
+    </header>
+
+    <a href="javascript:history.back()">
+        <img src="../../Imagenes/Iconos/Icono Regresar.png" alt="Regresar atrás" class="back-button">
+    </a>
+
+    <div class="content-container">
+        <div class="image-container">
+            <img src="../Rolls/Roll Bacon.jpg" alt="Roll Bacon">
+        </div>
+        <div class="extras-container">
+            <h2>Roll Bacon.</h2>
+            <div id="precioTotal">4,00 €</div> <!-- Precio en tiempo real -->
+
+            <button onclick="agregarAlCarrito()">Agregar al Carrito</button>
+        </div>
+    </div>
+
+    <img id="sending-image" src="../../Imagenes/Enviando a carrito.jpeg" alt="Enviando al carrito">
+
+    <a href="../../Carrito.html">
+        <img src="../../Imagenes/Iconos/Carrito.png" alt="Ver Carrito" class="cart-icon">
+    </a>
+
+    <script>
+        const PRECIO_BASE = 4.00;
+
+        function calcularPrecio() {
+            // Sin extras, el precio se mantiene como el precio base
+            document.getElementById("precioTotal").textContent = PRECIO_BASE.toFixed(2) + " €"; // Solo precio sin texto adicional
+        }
+
+        function agregarAlCarrito() {
+            const producto = "Roll Bacon";
+            let extras = [""]; // Siempre se envían sin extras
+
+            let precioTotal = PRECIO_BASE; // Sin extras
+
+            let item = {
+                nombre: producto,
+                extras: extras,
+                precioBase: PRECIO_BASE,
+                precioTotal: precioTotal
+            };
+
+            let Carrito = JSON.parse(localStorage.getItem('Carrito')) || [];
+            Carrito.push(item);
+            localStorage.setItem('Carrito', JSON.stringify(Carrito));
+
+            mostrarImagenEnvio();
+        }
+
+        function mostrarImagenEnvio() {
+            let sendingImage = document.getElementById("sending-image");
+            sendingImage.style.display = "block";
+            setTimeout(() => { 
+                sendingImage.style.display = "none";
+            }, 1000);
+        }
+
+        window.onload = function() {
+            calcularPrecio(); // Calcula el precio al cargar la página
+        };
+    </script>
+</body>
+</html>
