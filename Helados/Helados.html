@@ -22,8 +22,8 @@
             align-items: center;
         }
         header div {
-            flex-grow: 1; /* Permite que el div ocupe el espacio restante */
-            text-align: center; /* Centra el texto dentro del div */
+            flex-grow: 1;
+            text-align: center;
         }
         .go-home-button img {
             width: 50px;
@@ -57,24 +57,6 @@
             color: #E60012;
             font-weight: bold;
         }
-        .buttons {
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
-        }
-        .buttons button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 0 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 1.2em;
-        }
-        .buttons button:hover {
-            background-color: #45a049;
-        }
     </style>
 </head>
 <body>
@@ -98,11 +80,7 @@
                 <h3>Calippo Fresa</h3>
                 <p>0,00 €</p>
             </div>
-            <!-- Resto de los elementos del carrusel -->
-        </div>
-        <div class="buttons">
-            <button id="prevBtn">&#10094;</button>
-            <button id="nextBtn">&#10095;</button>
+            <!-- Agrega más imágenes si lo necesitas -->
         </div>
     </div>
 
@@ -111,22 +89,35 @@
         const items = document.querySelectorAll('.carousel-item');
         const totalItems = items.length;
 
-        // Botón siguiente
-        document.getElementById('nextBtn').addEventListener('click', function() {
-            if (currentIndex < totalItems - 1) {
-                currentIndex++;
-            } else {
-                currentIndex = 0;
-            }
-            updateCarousel();
+        // Deslizar para cambiar imágenes
+        let startX = 0;
+        let endX = 0;
+
+        const carousel = document.querySelector('.carousel');
+
+        carousel.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX; // Posición inicial
         });
 
-        // Botón anterior
-        document.getElementById('prevBtn').addEventListener('click', function() {
-            if (currentIndex > 0) {
-                currentIndex--;
-            } else {
-                currentIndex = totalItems - 1;
+        carousel.addEventListener('touchmove', function(e) {
+            endX = e.touches[0].clientX; // Posición final mientras se mueve el dedo
+        });
+
+        carousel.addEventListener('touchend', function() {
+            if (startX > endX + 30) {
+                // Deslizar a la izquierda (siguiente imagen)
+                if (currentIndex < totalItems - 1) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0; // Volver al primer elemento
+                }
+            } else if (startX < endX - 30) {
+                // Deslizar a la derecha (imagen anterior)
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = totalItems - 1; // Volver al último elemento
+                }
             }
             updateCarousel();
         });
@@ -134,39 +125,8 @@
         // Función para actualizar el carrusel
         function updateCarousel() {
             const newTransformValue = -currentIndex * 100;
-            document.querySelector('.carousel').style.transform = `translateX(${newTransformValue}%)`;
+            carousel.style.transform = `translateX(${newTransformValue}%)`;
         }
-
-        // Gestos táctiles (swipe)
-        let startX = 0;
-        let endX = 0;
-
-        document.querySelector('.carousel').addEventListener('touchstart', function(e) {
-            startX = e.touches[0].clientX; // Almacena la posición inicial al tocar
-        });
-
-        document.querySelector('.carousel').addEventListener('touchmove', function(e) {
-            endX = e.touches[0].clientX; // Almacena la posición final al mover el dedo
-        });
-
-        document.querySelector('.carousel').addEventListener('touchend', function() {
-            if (startX > endX + 30) {
-                // Deslizar a la izquierda (siguiente imagen)
-                if (currentIndex < totalItems - 1) {
-                    currentIndex++;
-                } else {
-                    currentIndex = 0;
-                }
-            } else if (startX < endX - 30) {
-                // Deslizar a la derecha (imagen anterior)
-                if (currentIndex > 0) {
-                    currentIndex--;
-                } else {
-                    currentIndex = totalItems - 1;
-                }
-            }
-            updateCarousel();
-        });
     </script>
 
 </body>
