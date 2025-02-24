@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -20,9 +21,12 @@
             font-size: 2em;
             display: flex;
             align-items: center;
-            justify-content: space-between;
         }
-        .go-home-button img, .info-button img {
+        header div {
+            flex-grow: 1;
+            text-align: center;
+        }
+        .go-home-button img {
             width: 50px;
             height: 50px;
         }
@@ -54,83 +58,209 @@
             color: #E60012;
             font-weight: bold;
         }
-        /* Estilos para la modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-        .modal-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            max-width: 90%;
-            max-height: 90%;
-        }
-        .close {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 30px;
-            color: white;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
 
-<header>
-    <a href="../index.html" class="go-home-button">
-        <img src="../Imagenes/Iconos/Icono INICIO.jpg" alt="Volver al Inicio">
-    </a>
-    <div>"HELADOS"</div>
-    <a class="info-button" onclick="openModal()">
-        <img src="../Imagenes/Iconos/Icono INFO.jpg" alt="Información">
-    </a>
-</header>
+    <header>
+        <a href="../index.html" class="go-home-button">
+            <img src="../Imagenes/Iconos/Icono INICIO.jpg" alt="Volver al Inicio">
+        </a>
+        <div>"HELADOS"</div>
+    </header>
 
-<div class="carousel-container">
-    <div class="carousel" id="carousel">
-        <div class="carousel-item">
-            <img src="../Helados/Fotos Helados/Calippo Cola.jpg" alt="Calippo Cola">
-            <h3>Calippo Cola</h3>
-            <p>0,00 €</p>
+    <div class="carousel-container">
+        <div class="carousel" id="carousel">
+  <div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Calippo Cola.jpg" alt="Calippo Cola" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/CalippoNo.jpg';">
+    <h3>Calippo Cola</h3>
+    <p>0,00 €</p>
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Calippo Fresa.jpg" alt="Calippo Fresa" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/CalippoNo.jpg';">
+    <h3>Calippo Fresa</h3>
+    <p>0,00 €</p>
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Calippo Lima.png" alt="Calippo Lima" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/CalippoNo.jpg';">
+    <h3>Calippo Lima</h3>
+    <p>0,00 €</p>
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Calippo Naranja.jpg" alt="Calippo Naranja" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/CalippoNo.jpg';">
+    <h3>Calippo Naranja</h3>
+    <p>0,00 €</p>
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Cornetto Go.jpg" alt="Cornetto Go" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/Cornetto GoNo.jpg';">
+    <h3>Cornetto Go</h3>
+    <p>0,00 €</p>
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Dracula.jpg" alt="Dracula" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/DraculaNo.jpg';">
+    <h3>Dracula</h3>
+    <p>0,00 €</p>
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Haribo.jpg" alt="Haribo" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HariboNo.jpg';">
+    <h3>Haribo</h3>
+    <p>0,00 €</p>
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Magnum Almendras.jpg" alt="Magnum Almendras" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/MagnumNo.jpg';">
+    <h3>Magnum Almendras</h3>
+    <p>0,00 €</p>
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Magnum Blanco.jpg" alt="Magnum Blanco" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/MagnumNo.jpg';">
+    <h3>Magnum Blanco</h3>
+    <p>0,00 €</p>
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Magnum Clasico.jpg" alt="Magnum Clásico" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/MagnumNo.jpg';">
+    <h3>Magnum Clásico</h3>
+    <p>0,00 €</p>
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Magnum Doble Nocciola.jpg" alt="Magnum Doble Nocciola" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/MagnumNo.jpg';">
+    <h3>Magnum Doble Nocciola</h3>
+    <p>0,00 €</p>
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Magnum Menta.jpg" alt="Magnum Menta" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/MagnumNo.jpg';">
+    <h3>Magnum Menta</h3>
+    <p>0,00 €</p>
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Magnum Sandwich.jpg" alt="Magnum Sandwich" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/Magnum SandwichNo.jpg';">
+    <h3>Magnum Sandwich</h3>
+    <p>0,00 €</p>
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Sandwich.jpg" alt="Sandwich" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/SandwichNo.jpg';">
+    <h3>Sandwich</h3>
+    <p>0,00 €</p>
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Solero.jpg" alt="Solero" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/SoleroNo.jpg';">
+    <h3>Solero</h3>
+    <p>0,00 €</p>
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Super Cornetto.jpg" alt="Super Cornetto" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/Super CornettoNo.jpg';">
+    <h3>Super Cornetto</h3>
+    <p>0,00 €</p>
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Twister Cosmix.jpg" alt="Twister Cosmix" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/Twister CosmixNo.jpg';">
+    <h3>Twister Cosmix</h3>
+    <p>0,00 €</p>
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Super Twister.jpg" alt="Super Twister" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/Super TwisterNo.jpg';">
+    <h3>Super Twister</h3>
+    <p>0,00 €</p>
+            </div>
+            <!-- Agrega más imágenes si lo necesitas -->
         </div>
-        <div class="carousel-item">
-            <img src="../Helados/Fotos Helados/Calippo Fresa.jpg" alt="Calippo Fresa">
-            <h3>Calippo Fresa</h3>
-            <p>0,00 €</p>
-        </div>
-        <div class="carousel-item">
-            <img src="../Helados/Fotos Helados/Calippo Lima.png" alt="Calippo Lima">
-            <h3>Calippo Lima</h3>
-            <p>0,00 €</p>
-        </div>
-        <!-- Agrega más imágenes aquí -->
     </div>
-</div>
 
-<!-- Modal -->
-<div id="imageModal" class="modal">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <img class="modal-content" id="modalImage" src="../Imagenes/Info.jpg" alt="Información">
-</div>
+    <script>
+        let currentIndex = 0;
+        const items = document.querySelectorAll('.carousel-item');
+        const totalItems = items.length;
 
-<script>
-    function openModal() {
-        document.getElementById("imageModal").style.display = "block";
-    }
+        // Deslizar para cambiar imágenes (Táctil)
+        let startX = 0;
+        let endX = 0;
+        let startY = 0;
+        let endY = 0;
 
-    function closeModal() {
-        document.getElementById("imageModal").style.display = "none";
-    }
-</script>
+        const carousel = document.querySelector('.carousel');
+
+        // Manejar eventos táctiles (para dispositivos con pantalla táctil)
+        carousel.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+        });
+
+        carousel.addEventListener('touchmove', function(e) {
+            endX = e.touches[0].clientX;
+            endY = e.touches[0].clientY;
+        });
+
+        carousel.addEventListener('touchend', function() {
+            if (startX > endX + 30) {
+                if (currentIndex < totalItems - 1) {
+                    currentIndex++;
+                }
+            } else if (startX < endX - 30) {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                }
+            }
+
+            // Si se desliza hacia arriba, reiniciar el carrusel
+            if (startY < endY - 30) {
+                currentIndex = 0;
+            }
+
+            updateCarousel();
+        });
+
+        // Manejar eventos de mouse (para dispositivos no táctiles)
+        carousel.addEventListener('mousedown', function(e) {
+            startX = e.clientX;
+        });
+
+        carousel.addEventListener('mousemove', function(e) {
+            if (startX) {
+                endX = e.clientX;
+            }
+        });
+
+        carousel.addEventListener('mouseup', function() {
+            if (startX > endX + 30) {
+                if (currentIndex < totalItems - 1) {
+                    currentIndex++;
+                }
+            } else if (startX < endX - 30) {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                }
+            }
+
+            updateCarousel();
+        });
+
+        // Manejar eventos de teclado (con teclas de flechas)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') {
+                if (currentIndex < totalItems - 1) {
+                    currentIndex++;
+                }
+            } else if (e.key === 'ArrowLeft') {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                }
+            }
+
+            updateCarousel();
+        });
+
+        // Función para actualizar el carrusel
+        function updateCarousel() {
+            // Eliminar la transición si estamos en el primer o último elemento
+            if (currentIndex === 0 || currentIndex === totalItems - 1) {
+                carousel.style.transition = 'none';
+            } else {
+                carousel.style.transition = 'transform 0.5s ease-in-out';
+            }
+
+            const newTransformValue = -currentIndex * 100;
+            carousel.style.transform = translateX(${newTransformValue}%);
+        }
+    </script>
 
 </body>
 </html>
