@@ -169,41 +169,93 @@
         const items = document.querySelectorAll('.carousel-item');
         const totalItems = items.length;
 
-        // Deslizar para cambiar imágenes
+        // Deslizar para cambiar imágenes (Táctil)
         let startX = 0;
         let endX = 0;
+        let startY = 0;
+        let endY = 0;
 
         const carousel = document.querySelector('.carousel');
 
+        // Manejar eventos táctiles (para dispositivos con pantalla táctil)
         carousel.addEventListener('touchstart', function(e) {
-            startX = e.touches[0].clientX; // Posición inicial
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
         });
 
         carousel.addEventListener('touchmove', function(e) {
-            endX = e.touches[0].clientX; // Posición final mientras se mueve el dedo
+            endX = e.touches[0].clientX;
+            endY = e.touches[0].clientY;
         });
 
         carousel.addEventListener('touchend', function() {
             if (startX > endX + 30) {
-                // Deslizar a la izquierda (siguiente imagen)
                 if (currentIndex < totalItems - 1) {
                     currentIndex++;
-                } else {
-                    currentIndex = 0; // Volver al primer elemento
                 }
             } else if (startX < endX - 30) {
-                // Deslizar a la derecha (imagen anterior)
                 if (currentIndex > 0) {
                     currentIndex--;
-                } else {
-                    currentIndex = totalItems - 1; // Volver al último elemento
                 }
             }
+
+            // Si se desliza hacia arriba, reiniciar el carrusel
+            if (startY < endY - 30) {
+                currentIndex = 0;
+            }
+
+            updateCarousel();
+        });
+
+        // Manejar eventos de mouse (para dispositivos no táctiles)
+        carousel.addEventListener('mousedown', function(e) {
+            startX = e.clientX;
+        });
+
+        carousel.addEventListener('mousemove', function(e) {
+            if (startX) {
+                endX = e.clientX;
+            }
+        });
+
+        carousel.addEventListener('mouseup', function() {
+            if (startX > endX + 30) {
+                if (currentIndex < totalItems - 1) {
+                    currentIndex++;
+                }
+            } else if (startX < endX - 30) {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                }
+            }
+
+            updateCarousel();
+        });
+
+        // Manejar eventos de teclado (con teclas de flechas)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') {
+                if (currentIndex < totalItems - 1) {
+                    currentIndex++;
+                }
+            } else if (e.key === 'ArrowLeft') {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                }
+            }
+
             updateCarousel();
         });
 
         // Función para actualizar el carrusel
         function updateCarousel() {
+            // Eliminar la transición si estamos en el primer o último elemento
+            if (currentIndex === 0 || currentIndex === totalItems - 1) {
+                carousel.style.transition = 'none';
+            } else {
+                carousel.style.transition = 'transform 0.5s ease-in-out';
+            }
+
             const newTransformValue = -currentIndex * 100;
             carousel.style.transform = `translateX(${newTransformValue}%)`;
         }
