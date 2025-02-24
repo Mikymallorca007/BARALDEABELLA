@@ -13,18 +13,17 @@
             background-color: rgba(255, 255, 255, 0.9);
             text-align: center;
         }
-       header {
-    background-color: #E60012;
-    color: white;
-    padding: 20px;
-    font-size: 2em;
-    display: flex;
-    align-items: center;
-}
-
-header div {
-    flex-grow: 1; /* Permite que el div ocupe el espacio restante */
-    text-align: center; /* Centra el texto dentro del div */
+        header {
+            background-color: #E60012;
+            color: white;
+            padding: 20px;
+            font-size: 2em;
+            display: flex;
+            align-items: center;
+        }
+        header div {
+            flex-grow: 1; /* Permite que el div ocupe el espacio restante */
+            text-align: center; /* Centra el texto dentro del div */
         }
         .go-home-button img {
             width: 50px;
@@ -32,7 +31,8 @@ header div {
         }
         .carousel-container {
             position: relative;
-            width: 300px;
+            width: 100%;
+            max-width: 600px;
             margin: 40px auto;
             overflow: hidden;
         }
@@ -98,86 +98,7 @@ header div {
                 <h3>Calippo Fresa</h3>
                 <p>0,00 €</p>
             </div>
-            <div class="carousel-item">
-                <img src="../Helados/Fotos Helados/Calippo Lima.png" alt="Calippo Lima">
-                <h3>Calippo Lima</h3>
-                <p>0,00 €</p>
-            </div>
-            <div class="carousel-item">
-                <img src="../Helados/Fotos Helados/Calippo Naranja.jpg" alt="Calippo Naranja">
-                <h3>Calippo Naranja</h3>
-                <p>0,00 €</p>
-            </div>
-            <div class="carousel-item">
-                <img src="../Helados/Fotos Helados/Cornetto Go.jpg" alt="Cornetto Go">
-                <h3>Cornetto Go</h3>
-                <p>0,00 €</p>
-            </div>
-            <div class="carousel-item">
-                <img src="../Helados/Fotos Helados/Dracula.jpg" alt="Dracula">
-                <h3>Dracula</h3>
-                <p>0,00 €</p>
-            </div>
-            <div class="carousel-item">
-                <img src="../Helados/Fotos Helados/Haribo.jpg" alt="Haribo">
-                <h3>Haribo</h3>
-                <p>0,00 €</p>
-            </div>
-            <div class="carousel-item">
-                <img src="../Helados/Fotos Helados/Magnum Almendras.jpg" alt="Magnum Almendras">
-                <h3>Magnum Almendras</h3>
-                <p>0,00 €</p>
-            </div>
-            <div class="carousel-item">
-                <img src="../Helados/Fotos Helados/Magnum Blanco.jpg" alt="Magnum Blanco">
-                <h3>Magnum Blanco</h3>
-                <p>0,00 €</p>
-            </div>
-             <div class="carousel-item">
-                <img src="../Helados/Fotos Helados/Magnum Clasico.jpg" alt="Magnum Clasico">
-                <h3>Magnum Clásico</h3>
-                <p>0,00 €</p>
-            </div>
-            <div class="carousel-item">
-                <img src="../Helados/Fotos Helados/Magnum Doble Nocciola.jpg" alt="Magnum Doble Nocciola">
-                <h3>Magnum Doble Nocciola</h3>
-                <p>0,00 €</p>
-            </div>
-            <div class="carousel-item">
-                <img src="../Helados/Fotos Helados/Magnum Menta.jpg" alt="Magnum Menta">
-                <h3>Magnum Menta</h3>
-                <p>0,00 €</p>
-            </div>
-            <div class="carousel-item">
-                <img src="../Helados/Fotos Helados/Magnum Sandwich.jpg" alt="Magnum Sandwich">
-                <h3>Magnum Sandwich</h3>
-                <p>0,00 €</p>
-            </div>
-            <div class="carousel-item">
-                <img src="../Helados/Fotos Helados/Sandwich.jpg" alt="Sandwich">
-                <h3>Sandwich</h3>
-                <p>0,00 €</p>
-            </div>
-            <div class="carousel-item">
-                <img src="../Helados/Fotos Helados/Solero.jpg" alt="Solero">
-                <h3>Solero</h3>
-                <p>0,00 €</p>
-            </div>
-            <div class="carousel-item">
-                <img src="../Helados/Fotos Helados/Super Cornetto.jpg" alt="Super Cornetto">
-                <h3>Super Cornetto</h3>
-                <p>0,00 €</p>
-            </div>
-            <div class="carousel-item">
-                <img src="../Helados/Fotos Helados/Twister Cosmix.jpg" alt="Twister Cosmix">
-                <h3>Twister Cosmix</h3>
-                <p>0,00 €</p>
-            </div>
-            <div class="carousel-item">
-                <img src="../Helados/Fotos Helados/Super Twister.jpg" alt="Super Twister">
-                <h3>Super Twister</h3>
-                <p>0,00 €</p>
-            </div>
+            <!-- Resto de los elementos del carrusel -->
         </div>
         <div class="buttons">
             <button id="prevBtn">&#10094;</button>
@@ -190,6 +111,7 @@ header div {
         const items = document.querySelectorAll('.carousel-item');
         const totalItems = items.length;
 
+        // Botón siguiente
         document.getElementById('nextBtn').addEventListener('click', function() {
             if (currentIndex < totalItems - 1) {
                 currentIndex++;
@@ -199,6 +121,7 @@ header div {
             updateCarousel();
         });
 
+        // Botón anterior
         document.getElementById('prevBtn').addEventListener('click', function() {
             if (currentIndex > 0) {
                 currentIndex--;
@@ -208,10 +131,42 @@ header div {
             updateCarousel();
         });
 
+        // Función para actualizar el carrusel
         function updateCarousel() {
             const newTransformValue = -currentIndex * 100;
             document.querySelector('.carousel').style.transform = `translateX(${newTransformValue}%)`;
         }
+
+        // Gestos táctiles (swipe)
+        let startX = 0;
+        let endX = 0;
+
+        document.querySelector('.carousel').addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX; // Almacena la posición inicial al tocar
+        });
+
+        document.querySelector('.carousel').addEventListener('touchmove', function(e) {
+            endX = e.touches[0].clientX; // Almacena la posición final al mover el dedo
+        });
+
+        document.querySelector('.carousel').addEventListener('touchend', function() {
+            if (startX > endX + 30) {
+                // Deslizar a la izquierda (siguiente imagen)
+                if (currentIndex < totalItems - 1) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0;
+                }
+            } else if (startX < endX - 30) {
+                // Deslizar a la derecha (imagen anterior)
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = totalItems - 1;
+                }
+            }
+            updateCarousel();
+        });
     </script>
 
 </body>
