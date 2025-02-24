@@ -13,14 +13,18 @@
             background-color: rgba(255, 255, 255, 0.9);
             text-align: center;
         }
-        header {
-            background-color: #E60012;
-            color: white;
-            padding: 20px;
-            font-size: 2em;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+       header {
+    background-color: #E60012;
+    color: white;
+    padding: 20px;
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+}
+
+header div {
+    flex-grow: 1; /* Permite que el div ocupe el espacio restante */
+    text-align: center; /* Centra el texto dentro del div */
         }
         .go-home-button img {
             width: 50px;
