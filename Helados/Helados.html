@@ -71,7 +71,7 @@
     <div class="carousel-container">
         <div class="carousel" id="carousel">
             <div class="carousel-item">
-                <img src="../Helados/Fotos Helados/Calippo Cola.jpg" alt="Calippo Cola">
+               <img src="../Helados/Fotos Helados/Calippo Cola.jpg" alt="Calippo Cola">
                 <h3>Calippo Cola</h3>
                 <p>0,00 €</p>
             </div>
@@ -172,19 +172,15 @@
         // Deslizar para cambiar imágenes
         let startX = 0;
         let endX = 0;
-        let startY = 0;
-        let endY = 0;
 
         const carousel = document.querySelector('.carousel');
 
         carousel.addEventListener('touchstart', function(e) {
-            startX = e.touches[0].clientX; // Posición inicial horizontal
-            startY = e.touches[0].clientY; // Posición inicial vertical
+            startX = e.touches[0].clientX; // Posición inicial
         });
 
         carousel.addEventListener('touchmove', function(e) {
-            endX = e.touches[0].clientX; // Posición final horizontal
-            endY = e.touches[0].clientY; // Posición final vertical
+            endX = e.touches[0].clientX; // Posición final mientras se mueve el dedo
         });
 
         carousel.addEventListener('touchend', function() {
@@ -203,12 +199,6 @@
                     currentIndex = totalItems - 1; // Volver al último elemento
                 }
             }
-
-            if (startY < endY - 30) {
-                // Deslizar hacia arriba (volver al primer elemento)
-                currentIndex = 0;
-            }
-
             updateCarousel();
         });
 
