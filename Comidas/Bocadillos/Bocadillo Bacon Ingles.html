@@ -215,7 +215,7 @@ const seleccionados = [opcion1, opcion2, opcion3, opcion4].filter(item => item).
             return;
         }
 
-        const ingredientesSeleccionados = ["Atun"];  // Atún siempre está seleccionado
+        const ingredientesSeleccionados = ["Bacon"];  // Bacon siempre está seleccionado
         document.querySelectorAll("input[type=checkbox]:checked").forEach(checkbox => {
             ingredientesSeleccionados.push(checkbox.id.charAt(0).toUpperCase() + checkbox.id.slice(1)); 
         });
