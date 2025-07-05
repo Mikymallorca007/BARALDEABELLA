@@ -275,7 +275,7 @@ function agregarAlCarrito() {
     let carrito = JSON.parse(localStorage.getItem('Carrito')) || [];
     
     let producto = {
-        nombre: "Sandwich o tostada",
+        nombre: "Bocadillo (York) (Queso)",
         extras: ingredientesSeleccionados.length > 0 ? ingredientesSeleccionados : ["Sin extras"],  // Cambiado a 'extras'
         precioBase: PRECIO_BASE,            // Precio base
         precioTotal: precioNumerico         // Precio total con extras
