@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BAR ALDEA BELLA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      text-align: center;
+    }
+    header {
+      background-color: #E60012;
+      color: white;
+      padding: 20px;
+      font-size: 2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .go-home-button {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .go-home-button img {
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+    }
+    .back-button {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .back-button img {
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+    }
+    .content-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 30px;
+    }
+    .image-container {
+      flex: 1;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .image-container img {
+      width: 150px;
+      height: auto;
+      border-radius: 10px;
+      margin-top: -40px;
+    }
+    .extras-container {
+      flex: 1;
+      background: #f8f8f8;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: left;
+      max-width: 300px;
+    }
+    .extras-container h2 {
+      text-align: center;
+    }
+    .extras-container label {
+      display: block;
+      margin: 5px 0;
+      font-size: 1.1em;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 1.2em;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    button:active {
+      background-color: #45a049;
+    }
+    #confirmation-message {
+      display: none;
+      color: green;
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-top: 20px;
+      background-color: rgba(0, 255, 0, 0.2);
+      padding: 10px;
+      border-radius: 10px;
+      animation: mostrarMensaje 1s ease-out;
+    }
+    @keyframes mostrarMensaje {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    #sending-image {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1000;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+    #precioTotal {
+      font-size: 1.5em;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="../../index.html" class="go-home-button">
+      <img src="../../Imagenes/Iconos/Icono INICIO.jpg" alt="Volver al Inicio" />
+    </a>
+    <div>Desayuno<br>(Nº4)</div>
+    <div class="back-button">
+      <a href="javascript:history.back()">
+        <img src="../../Imagenes/Iconos/Icono Regresar.png" alt="Volver atrás" />
+      </a>
+    </div>
+  </header>
+
+  <div class="content-container">
+    <div class="image-container">
+      <img src="../../Comidas/Desayunos/Desayuno Nº4.jpg" alt="Desayuno Nº4" />
+    </div>
+    <div class="extras-container">
+      <h2>(Nº4)<br>Huevo, Bacon, Salchicha y Patatas:</h2>
+      <label><input type="checkbox" id="extra1" /> Blackpudding - 0,50€</label>
+      <label><input type="checkbox" id="extra2" /> Potato Scone - 0,50€</label>
+      <label><input type="checkbox" id="extra3" /> Scrambled egg - 1,00€</label>
+      <label><input type="checkbox" id="extra4" /> 1 Tostada Mat. - 0,90€</label>
+      <label><input type="checkbox" id="extra5" /> 2 Tostadas Mat. - 1,50€</label>
+
+      <div id="precioTotal">0.00 €</div>
+      <button onclick="agregarAlCarrito()">Agregar al Carrito</button>
+
+      <div id="confirmation-message">Producto agregado al Carrito.</div>
+    </div>
+  </div>
+
+  <img id="sending-image" src="../../Imagenes/Enviando a carrito.jpeg" alt="Enviando al carrito" />
+
+  <script>
+    const PRECIO_BASE = 5.50;
+
+    function calcularPrecio() {
+      let precioExtras = 0;
+      if (document.getElementById("extra1").checked) precioExtras += 0.50;
+      if (document.getElementById("extra2").checked) precioExtras += 0.50;
+      if (document.getElementById("extra3").checked) precioExtras += 1.00;
+      if (document.getElementById("extra4").checked) precioExtras += 0.90;
+      if (document.getElementById("extra5").checked) precioExtras += 1.50;
+
+      const precioTotal = PRECIO_BASE + precioExtras;
+      document.getElementById("precioTotal").textContent = precioTotal.toFixed(2) + " €";
+    }
+
+    document.querySelectorAll("input[type=checkbox]").forEach(cb => {
+      cb.addEventListener('change', calcularPrecio);
+    });
+
+    function agregarAlCarrito() {
+      const producto = "Desayuno nº4";
+      const extras = [];
+      let precioExtras = 0;
+
+      if (document.getElementById("extra1").checked) { extras.push("Blackpudding"); precioExtras += 0.50; }
+      if (document.getElementById("extra2").checked) { extras.push("Potato Scone"); precioExtras += 0.50; }
+      if (document.getElementById("extra3").checked) { extras.push("Scrambled egg"); precioExtras += 1.00; }
+      if (document.getElementById("extra4").checked) { extras.push("1 Tostada Mat."); precioExtras += 0.90; }
+      if (document.getElementById("extra5").checked) { extras.push("2 Tostadas Mat."); precioExtras += 1.50; }
+
+      const precioTotal = PRECIO_BASE + precioExtras;
+
+      const item = {
+        nombre: producto,
+        extras: extras.length > 0 ? extras : ["Sin extras"],
+        precioBase: PRECIO_BASE,
+        precioTotal: precioTotal
+      };
+
+      const Carrito = JSON.parse(localStorage.getItem('Carrito')) || [];
+      Carrito.push(item);
+      localStorage.setItem('Carrito', JSON.stringify(Carrito));
+
+      mostrarImagenEnvio();
+      mostrarConfirmacion();
+      deseleccionarExtras();
+      calcularPrecio();
+    }
+
+    function mostrarImagenEnvio() {
+      const img = document.getElementById("sending-image");
+      img.style.display = "block";
+      setTimeout(() => { img.style.display = "none"; }, 1000);
+    }
+
+    function mostrarConfirmacion() {
+      const mensaje = document.getElementById("confirmation-message");
+      mensaje.style.display = "block";
+      setTimeout(() => { mensaje.style.display = "none"; }, 2000);
+    }
+
+    function deseleccionarExtras() {
+      document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+    }
+
+    window.onload = function() {
+      deseleccionarExtras();
+      calcularPrecio();
+    };
+  </script>
+
+</body>
+</html>
