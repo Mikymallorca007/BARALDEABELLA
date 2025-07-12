@@ -1,5 +1,6 @@
 // usuarios.js
 const usuariosValidos = [
+  { usuario: "Pablo", contrasena: "777888" }, 
   { usuario: "Piedra", contrasena: "777888" }, 
   { usuario: "Pedro", contrasena: "777888" },  
   { usuario: "Lucas", contrasena: "777888" },  
