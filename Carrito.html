@@ -163,7 +163,7 @@
   </a>
 </div>
 
-<script src="usuarios.js"></script>
+<script src="usuarios.js?v=2"></script>
 
 <script>
   let Carrito = JSON.parse(localStorage.getItem('Carrito')) || [];
@@ -190,8 +190,7 @@
         const itemPrice = document.createElement('div');
         itemPrice.classList.add('item-price');
         itemPrice.innerHTML = `
-          ${item.precioTotal.toFixed(2)}€
-          <br>
+          ${item.precioTotal.toFixed(2)}€<br>
           <button onclick="eliminarItem(${index})" style="margin-top:5px;font-size:0.9em;">🗑️</button>
         `;
 
@@ -269,19 +268,27 @@
   }
 
   function iniciarSesion() {
-    const usuarioInput = document.getElementById('usuario').value;
-    const contrasenaInput = document.getElementById('contrasena').value;
+    const usuarioInputElement = document.getElementById('usuario');
+    const contrasenaInputElement = document.getElementById('contrasena');
+
+    const usuario = usuarioInputElement.value.trim();
+    const contrasena = contrasenaInputElement.value.trim();
 
     const usuarioValido = usuariosValidos.find(u => 
-      u.usuario === usuarioInput && u.contrasena === contrasenaInput
+      u.usuario === usuario && u.contrasena === contrasena
     );
 
     if (usuarioValido) {
-      localStorage.setItem('usuarioLogeado', usuarioInput);
+      localStorage.setItem('usuarioLogeado', usuario);
+      mostrarMensaje("exito", "¡Inicio de sesión exitoso!");
       verificarSesion();
     } else {
       mostrarMensaje("error", "Usuario o contraseña incorrectos.");
     }
+
+    // 🔄 Limpiar campos tras intento
+    usuarioInputElement.value = "";
+    contrasenaInputElement.value = "";
   }
 
   function cerrarSesion() {
