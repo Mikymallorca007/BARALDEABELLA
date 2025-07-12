@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAR ALDEA BELLA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+        }
+        header {
+            background-color: #E60012;
+            color: white;
+            padding: 20px;
+            font-size: 2em;
+            display: flex;
+            align-items: center;
+        }
+        header div {
+            flex-grow: 1;
+            text-align: center;
+        }
+        .go-home-button img {
+            width: 50px;
+            height: 50px;
+        }
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 40px auto;
+            overflow: hidden;
+        }
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-item {
+            min-width: 100%;
+            text-align: center;
+        }
+        .carousel-item img {
+            width: 60%;
+            border-radius: 10px;
+        }
+        .carousel-item h3 {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        .carousel-item p {
+            font-size: 1.1em;
+            color: #E60012;
+            font-weight: bold;
+        }
+        .helados-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .helados-icon img {
+            width: 50px;
+            height: 50px;
+        }
+        /* Estilos para el modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.9);
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html" class="go-home-button">
+        <img src="../Imagenes/Iconos/Icono INICIO.jpg" alt="Volver al Inicio">
+    </a>
+    <div>"HELADOS"</div>
+    <a href="javascript:void(0);" class="helados-icon" onclick="openModal()">
+        <img src="../Helados/Icono Cartel Helados.png">
+    </a>
+</header>
+
+<div class="carousel-container">
+    <div class="carousel" id="carousel">
+        <div class="carousel-item">
+            <img src="../Helados/Fotos Helados/Calippo Cola.jpg" alt="Calippo Cola" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Calippo ColaNo.jpg';">
+            <h3>Calippo Cola</h3>
+            <p>2,00 €</p>
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Calippo Fresa.jpg" alt="Calippo Fresa" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Calippo FresaNo.jpg';">
+    <h3>Calippo Fresa</h3>
+    <p>2,00 €</p>
+
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Calippo Lima.png" alt="Calippo Lima" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Calippo LimaNo.jpg';">
+    <h3>Calippo Lima</h3>
+    <p>2,00 €</p>
+
+<!--
+<div class="carousel-item">
+   <img src="../Helados/Fotos Helados/Calippo Naranja.jpg" alt="Calippo Naranja" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Calippo NaranjaNo.jpg';">
+   <h3>Calippo Naranja</h3>
+   <p>2,00 €</p>
+</div>
+-->
+
+
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Ben&Jerry Cookie Dough.jpg" alt="Ben&Jerry Cookie Dough" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Ben&Jerry Cookie DoughNo.jpg';">
+    <h3>Ben&Jerry Cookie Dough</h3>
+    <p>3,00 €</p>
+
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Cornetto Go.jpg" alt="Cornetto Go" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Cornetto GoNo.jpg';">
+    <h3>Cornetto Go</h3>
+    <p>2,70 €</p>
+
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Frigo Pie.jpg" alt="Frigo Pie" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Frigo PieNo.jpg';">
+    <h3>Frigo Pie</h3>
+    <p>2,00 €</p>
+
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Choc´n Ball.jpg" alt="Choc´n Ball" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Choc´n BallNo.jpg';">
+    <h3>Choc´n Ball</h3>
+    <p>3,00 €</p>
+
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Magnum Almendras.jpg" alt="Magnum Almendras" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Magnum AlmendrasNo.jpg';">
+    <h3>Magnum Almendras</h3>
+    <p>3,00 €</p>
+
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Magnum Blanco.jpg" alt="Magnum Blanco" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Magnum BlancoNo.jpg';">
+    <h3>Magnum Blanco</h3>
+    <p>3,00 €</p>
+
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Magnum Clasico.jpg" alt="Magnum Clásico" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Magnum ClasicoNo.jpg';">
+    <h3>Magnum Clásico</h3>
+    <p>3,00 €</p>
+
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Magnum Cookies.jpg" alt="Magnum Cookies" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Magnum CookiesNo.jpg';">
+    <h3>Magnum Cookies</h3>
+    <p>3,00 €</p>
+
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Magnum Doble Nocciola.jpg" alt="Magnum Doble Nocciola" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Magnum Doble NocciolaNo.jpg';">
+    <h3>Magnum Doble Nocciola</h3>
+    <p>3,00 €</p>
+
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Magnum Doble Chocolate.jpg" alt="Magnum Doble Chocolate" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Magnum Doble ChocolateNo.jpg';">
+    <h3>Magnum Doble Chocolate</h3>
+    <p>3,00 €</p>
+
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Magnum Menta.jpg" alt="Magnum Menta" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Magnum MentaNo.jpg';">
+    <h3>Magnum Menta</h3>
+    <p>3,00 €</p>
+
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Sandwich.jpg" alt="Sandwich" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/SandwichNo.jpg';">
+    <h3>Sandwich</h3>
+    <p>1,90 €</p>
+
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Filipino Sandwich Blanco.jpg" alt="Filipino Sandwich Blanco" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Filipino Sandwich BlancoNo.jpg';">
+    <h3>Filipino Sandwich Blanco</h3>
+    <p>2,70 €</p>
+
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Filipino Sandwich Caramelo.jpg" alt="Filipino Sandwich Caramelo" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Filipino Sandwich CarameloNo.jpg';">
+    <h3>Filipino Sandwich Caramelo</h3>
+    <p>2,70 €</p>
+
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Ice Mars.jpg" alt="Ice Mars" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Ice MarsNo.jpg';">
+    <h3>Ice Mars</h3>
+    <p>2,30 €</p>
+
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Ice Snickers.jpg" alt="Ice Snickers" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Ice SnickersNo.jpg';">
+    <h3>Ice Snickers</h3>
+    <p>2,30 €</p>
+
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Filipino Bombon.jpg" alt="Filipino Bombon" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Filipino BombonNo.jpg';">
+    <h3>Filipino Bombon</h3>
+    <p>1,50 €</p>
+
+
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Solero.jpg" alt="Solero" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/SoleroNo.jpg';">
+    <h3>Solero</h3>
+    <p>2,90 €</p>
+
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Cornetto Clasico.jpg" alt="Cornetto Clasico" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Cornetto ClasicoNo.jpg';">
+    <h3>Cornetto Clasico</h3>
+    <p>1,90 €</p>
+
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Cornetto Max Mango Vainilla.jpg" alt="Cornetto Max Mango Vainilla" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Cornetto Max Mango VainillaNo.jpg';">
+    <h3>Cornetto Max Mango Vainilla</h3>
+    <p>2,30 €</p>
+
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Cornetto Max Avellana Choc.jpg" alt="Cornetto Max Avellana Choc" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Cornetto Max Avellana ChocNo.jpg';">
+    <h3>Cornetto Max Avellana Choc</h3>
+    <p>2,30 €</p>
+
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Cornetto XXL Vainilla.jpg" alt="Cornetto XXL Vainilla" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Cornetto XXL VainillaNo.jpg';">
+    <h3>Cornetto XXL Vainilla</h3>
+    <p>2,30 €</p>
+
+
+
+
+<!--
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Twister Cosmix.jpg" alt="Twister Cosmix" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Twister CosmixNo.jpg';">
+    <h3>Twister Cosmix</h3>
+    <p>2,90 €</p>
+-->
+
+
+
+
+
+</div>
+<div class="carousel-item">
+    <img src="../Helados/Fotos Helados/Super Twister.jpg" alt="Super Twister" onerror="this.onerror=null; this.src='../Helados/Fotos Helados/HeladosNo/Super TwisterNo.jpg';">
+    <h3>Super Twister</h3>
+    <p>2,30 €</p>
+        </div>
+        <!-- Agrega más imágenes si lo necesitas -->
+    </div>
+</div>
+
+<div id="myModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
+
+<script>
+    let currentIndex = 0;
+    const items = document.querySelectorAll('.carousel-item');
+    const totalItems = items.length;
+
+    // Deslizar para cambiar imágenes (Táctil)
+    let startX = 0;
+    let endX = 0;
+    let startY = 0;
+    let endY = 0;
+
+    const carousel = document.querySelector('.carousel');
+
+    // Manejar eventos táctiles (para dispositivos con pantalla táctil)
+    carousel.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    });
+
+    carousel.addEventListener('touchmove', function(e) {
+        endX = e.touches[0].clientX;
+        endY = e.touches[0].clientY;
+    });
+
+    carousel.addEventListener('touchend', function() {
+        if (startX > endX + 30) {
+            if (currentIndex < totalItems - 1) {
+                currentIndex++;
+            }
+        } else if (startX < endX - 30) {
+            if (currentIndex > 0) {
+                currentIndex--;
+            }
+        }
+
+        updateCarousel();
+    });
+
+    // Manejar eventos de mouse (para dispositivos no táctiles)
+    carousel.addEventListener('mousedown', function(e) {
+        startX = e.clientX;
+    });
+
+    carousel.addEventListener('mousemove', function(e) {
+        if (startX) {
+            endX = e.clientX;
+        }
+    });
+
+    carousel.addEventListener('mouseup', function() {
+        if (startX > endX + 30) {
+            if (currentIndex < totalItems - 1) {
+                currentIndex++;
+            }
+        } else if (startX < endX - 30) {
+            if (currentIndex > 0) {
+                currentIndex--;
+            }
+        }
+
+        updateCarousel();
+    });
+
+    // Manejar eventos de teclado (con teclas de flechas)
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowRight') {
+            if (currentIndex < totalItems - 1) {
+                currentIndex++;
+            }
+        } else if (e.key === 'ArrowLeft') {
+            if (currentIndex > 0) {
+                currentIndex--;
+            }
+        }
+
+        updateCarousel();
+    });
+
+    // Función para actualizar el carrusel
+    function updateCarousel() {
+        // Eliminar la transición si estamos en el primer o último elemento
+        if (currentIndex === 0 || currentIndex === totalItems - 1) {
+            carousel.style.transition = 'none';
+        } else {
+            carousel.style.transition = 'transform 0.5s ease-in-out';
+        }
+
+        const newTransformValue = -currentIndex * 100;
+        carousel.style.transform = `translateX(${newTransformValue}%)`;
+    }
+
+    function openModal() {
+        document.getElementById("myModal").style.display = "block";
+        document.getElementById("modalImage").src = "../Helados/Cartel Helados.png";
+    }
+
+    function closeModal() {
+        document.getElementById("myModal").style.display = "none";
+    }
+</script>
+
+</body>
+</html>
