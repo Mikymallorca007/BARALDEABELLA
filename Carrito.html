@@ -1,139 +1,170 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Pedido - Lista Personal</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; background-color: #fff; text-align: center; }
-    header {
-      background-color: #E60012;
-      color: white;
-      padding: 15px;
-      font-size: 1.8em;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-    .home-button {
-      position: absolute;
-      left: 10px;
-      top: 10px;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-    }
-    .container { padding: 30px; }
-    .item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-      font-size: 1.1em;
-    }
-    .item-name { flex: 1; text-align: left; }
-    .item-price { width: 100px; text-align: right; }
-    .delete-button {
-      background-color: transparent;
-      border: none;
-      font-size: 1.2em;
-      cursor: pointer;
-      color: #E60012;
-      margin-left: 10px;
-    }
-    #total { font-size: 1.3em; margin-top: 20px; font-weight: bold; }
-    button {
-      background-color: #E60012;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      font-size: 1em;
-      border-radius: 5px;
-      margin: 10px;
-      cursor: pointer;
-    }
-    button:hover { background-color: #c00010; }
-    footer { margin-top: 40px; font-size: 0.9em; color: #777; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar Aldea Bella - Pedido Directo</title>
+    <!-- Librería Oficial de EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --rojo: #E60012; --amarillo: #FFC72C; --verde: #28a745; --gris: #f4f4f4; }
+        body { font-family: 'Roboto', sans-serif; margin: 0; background-color: var(--gris); display: flex; flex-direction: column; min-height: 100vh; }
+        
+        header { background: var(--rojo); color: white; padding: 15px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .btn-header img { width: 35px; height: 35px; cursor: pointer; }
+        
+        .container { flex: 1; padding: 15px; max-width: 500px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+        
+        .pedido-card { background: white; border-radius: 12px; padding: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .producto { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee; }
+        .producto:last-child { border-bottom: none; }
+        .prod-info b { display: block; font-size: 1.1em; color: #333; }
+        .prod-info span { font-size: 0.85em; color: #777; }
+        .prod-precio { font-weight: bold; color: var(--rojo); font-size: 1.1em; }
+
+        .total-row { display: flex; justify-content: space-between; padding: 20px 0; font-size: 1.5em; font-weight: bold; color: #000; }
+
+        .btn { border: none; width: 100%; padding: 18px; border-radius: 12px; font-size: 1.2em; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; transition: transform 0.2s; text-decoration: none; }
+        .btn:active { transform: scale(0.98); }
+        .btn-enviar { background: var(--verde); color: white; }
+        .btn-mas { background: var(--amarillo); color: black; }
+        
+        #loading-overlay { display: none; color: var(--verde); font-weight: bold; text-align: center; margin-bottom: 10px; font-size: 1.1em; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0.5; } }
+        .vacio { text-align: center; color: #999; margin-top: 50px; }
+        footer { background: var(--rojo); color: white; text-align: center; padding: 10px; font-size: 0.8em; margin-top: auto; }
+    </style>
 </head>
 <body>
 
 <header>
-  <a href="index.html">
-    <img src="Imagenes/Iconos/Icono INICIO.jpg" alt="Inicio" class="home-button">
-  </a>
-  Mi Pedido
+    <a href="index.html" class="btn-header"><img src="Imagenes/Iconos/Icono INICIO.jpg" alt="Inicio"></a>
+    <div style="font-size: 1.2em; font-weight: bold;">MI PEDIDO</div>
+    <div onclick="vaciar()" class="btn-header"><img src="Imagenes/Iconos/Eliminar Carrito.png" style="filter: brightness(0) invert(1);"></div>
 </header>
 
 <div class="container">
-  <div id="lista-items"></div>
-  <div id="total"></div>
+    <div id="contenido-carrito">
+        <div class="pedido-card" id="lista-productos">
+            <!-- Los productos se cargarán aquí -->
+        </div>
 
-  <button onclick="seguirEligiendo()">Seguir eligiendo</button>
-  <button onclick="vaciarLista()">Vaciar lista</button>
+        <div class="total-row">
+            <span>TOTAL:</span>
+            <span id="txt-total">0.00€</span>
+        </div>
+
+        <div id="loading-overlay">⏳ Enviando pedido al Bar...</div>
+
+        <button id="btn-enviar-final" onclick="enviarPedido()" class="btn btn-enviar">🚀 ENVIAR PEDIDO AHORA</button>
+        <a href="Comidas.html" class="btn btn-mas">➕ AÑADIR MÁS PRODUCTOS</a>
+    </div>
+
+    <div id="carrito-vacio" class="vacio" style="display:none;">
+        <p>Tu carrito está vacío</p>
+        <a href="Comidas.html" class="btn btn-mas">Ver la Carta</a>
+    </div>
 </div>
 
-<footer>
-  Esta lista es solo para ayudarte a recordar tu pedido. Muéstrala al camarero cuando estés listo. 🍻
-</footer>
+<footer>&copy; 2025 Bar Aldea Bella | Todos los derechos reservados</footer>
 
 <script>
-  let Carrito = JSON.parse(localStorage.getItem('Carrito')) || [];
+    // --- CONFIGURACIÓN YA INTEGRADA ---
+    const SERVICE_ID = "service_jnnyczp"; 
+    const TEMPLATE_ID = "template_ld8rwqf"; 
+    const PUBLIC_KEY = "q9M6x1qPcuEF3AnoJ"; 
 
-  function mostrarLista() {
-    const contenedor = document.getElementById('lista-items');
-    const total = document.getElementById('total');
-    contenedor.innerHTML = '';
-    let suma = 0;
+    // Inicializar EmailJS
+    emailjs.init(PUBLIC_KEY);
 
-    if (Carrito.length === 0) {
-      contenedor.innerHTML = '<p>No tienes productos seleccionados.</p>';
-      total.textContent = '';
-      return;
+    let Carrito = JSON.parse(localStorage.getItem('Carrito')) || [];
+
+    function renderizar() {
+        const lista = document.getElementById('lista-productos');
+        const totalTxt = document.getElementById('txt-total');
+        const normalView = document.getElementById('contenido-carrito');
+        const emptyView = document.getElementById('carrito-vacio');
+
+        if (Carrito.length === 0) {
+            normalView.style.display = "none";
+            emptyView.style.display = "block";
+            return;
+        }
+
+        let html = "";
+        let suma = 0;
+        Carrito.forEach(item => {
+            const p = parseFloat(item.precioTotal) || 0;
+            suma += p;
+            const ex = (item.extras && item.extras.length > 0) ? item.extras.join(", ") : "Sin extras";
+            html += `
+                <div class="producto">
+                    <div class="prod-info">
+                        <b>${item.nombre}</b>
+                        <span>Extras: ${ex}</span>
+                    </div>
+                    <div class="prod-precio">${p.toFixed(2)}€</div>
+                </div>`;
+        });
+
+        lista.innerHTML = html;
+        totalTxt.innerText = suma.toFixed(2) + "€";
     }
 
-    Carrito.forEach((item, index) => {
-      const div = document.createElement('div');
-      div.classList.add('item');
-      div.innerHTML = `
-        <div class="item-name">
-          ${item.nombre}<br><small>Extras: ${item.extras.join(', ')}</small>
-        </div>
-        <div class="item-price">
-          ${item.precioTotal.toFixed(2)}€
-          <button class="delete-button" onclick="eliminarItem(${index})">🗑️</button>
-        </div>
-      `;
-      contenedor.appendChild(div);
-      suma += item.precioTotal;
-    });
+    function enviarPedido() {
+        const btn = document.getElementById('btn-enviar-final');
+        const loader = document.getElementById('loading-overlay');
 
-    total.textContent = `Total estimado: ${suma.toFixed(2)}€`;
-  }
+        // 1. Bloquear botón para evitar doble clic
+        btn.disabled = true;
+        btn.style.opacity = "0.5";
+        loader.style.display = "block";
 
-  function eliminarItem(index) {
-    Carrito.splice(index, 1);
-    localStorage.setItem('Carrito', JSON.stringify(Carrito));
-    mostrarLista();
-  }
+        // 2. Crear el cuerpo del mensaje
+        let total = 0;
+        let detalle = "NUEVO PEDIDO DESDE LA WEB:\n------------------------------\n";
+        
+        Carrito.forEach(item => {
+            const p = parseFloat(item.precioTotal) || 0;
+            const extras = (item.extras && item.extras.length > 0) ? item.extras.join(", ") : "Ninguno";
+            detalle += `- ${item.nombre}\n  Extras: ${extras}\n  Precio: ${p.toFixed(2)}€\n\n`;
+            total += p;
+        });
+        
+        detalle += `------------------------------\nTOTAL DEL PEDIDO: ${total.toFixed(2)}€\n`;
+        detalle += `Hora del pedido: ${new Date().toLocaleString()}`;
 
-  function vaciarLista() {
-    if (confirm("¿Vaciar toda la lista de pedido?")) {
-      localStorage.removeItem('Carrito');
-      Carrito = [];
-      mostrarLista();
+        // 3. Enviar por EmailJS
+        emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+            message: detalle, // Este es el nombre de la variable que debes tener en tu plantilla de EmailJS: {{message}}
+            to_name: "Bar Aldea Bella"
+        })
+        .then(() => {
+            // ÉXITO
+            alert("✅ ¡PEDIDO ENVIADO CON ÉXITO!\n\nEn el Bar Aldea Bella ya lo hemos recibido. ¡Gracias!");
+            localStorage.removeItem('Carrito'); // Limpiar el pedido tras el envío
+            window.location.href = "index.html";
+        })
+        .catch((err) => {
+            // ERROR
+            alert("❌ Hubo un problema al enviar el pedido.\nPor favor, asegúrate de tener conexión a internet o inténtalo de nuevo.");
+            console.error("Error EmailJS:", err);
+            btn.disabled = false;
+            btn.style.opacity = "1";
+            loader.style.display = "none";
+        });
     }
-  }
 
-  function seguirEligiendo() {
-    window.history.back();
-  }
+    function vaciar() {
+        if(confirm("¿Seguro que quieres borrar todo tu pedido?")) {
+            localStorage.removeItem('Carrito');
+            location.reload();
+        }
+    }
 
-  window.onload = mostrarLista;
+    // Dibujar el carrito al cargar la página
+    window.onload = renderizar;
 </script>
 
 </body>
